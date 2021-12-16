@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+@font-face{
+    font-feature-settings:"liga","tnum","case","calt","zero","ss01","locl";
+    font-display:swap;
+    font-family:Inter;
+    font-style:normal;
+    font-weight:400;
+    src:url(/fonts/Inter-Regular.woff2) format("woff2")
+}
+@font-face{
+    font-feature-settings:"liga","tnum","case","calt","zero","ss01","locl";
+    font-display:swap;
+    font-family:Inter;
+    font-style:italic;
+    font-weight:400;
+    src:url(/fonts/Inter-Italic.woff2) format("woff2")
+}
+@font-face{
+    font-feature-settings:"liga","tnum","case","calt","zero","ss01","locl";
+    font-display:swap;
+    font-family:Inter;
+    font-style:normal;
+    font-weight:700;
+    src:url(/fonts/Inter-Bold.woff2) format("woff2")
+}
+@font-face{
+    font-feature-settings:"liga","tnum","case","calt","zero","ss01","locl";
+    font-display:swap;
+    font-family:Inter;
+    font-style:italic;
+    font-weight:700;
+    src:url(/fonts/Inter-BoldItalic.woff2) format("woff2")
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
