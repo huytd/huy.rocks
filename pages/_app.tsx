@@ -2,12 +2,13 @@ import '../styles/globals.css'
 import '../styles/github-theme.css'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
+import { Fragment } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const page = pageProps?.repo ?? "";
-  return <div>
+  return <Fragment>
     <div className="flex justify-center items-center bg-gray-100 h-16">
-      <div className="w-[600px] mx-auto flex items-center text-slate-500 font-bold">
+      <div className="container-center center-horizontal text-slate-500 font-bold">
         <Link href="/">
           <a className="font-bold text-gray-700">/home/huy</a>
         </Link>
@@ -16,7 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </div>
     </div>
     <Component {...pageProps} />
-  </div>
+    <footer className="flex justify-center items-center h-16 text-gray-500 text-sm">
+      <div className="container-center center-horizontal">
+      </div>
+    </footer>
+  </Fragment>
 }
 
 export default MyApp

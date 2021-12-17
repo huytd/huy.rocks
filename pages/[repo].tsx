@@ -2,6 +2,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from '
 import Head from 'next/head'
 import { marked } from 'marked';
 import Link from 'next/link';
+import { Fragment } from 'react';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let repo = context.params?.repo ?? null;
@@ -44,17 +45,17 @@ const Devlog: NextPage = ({ data, repo }: InferGetServerSidePropsType<typeof get
 
   const content = repo ? marked.parse(data).replace(/src=\"(.\/)?/g, `src="https://github.com/huytd/${repo}/raw/master/`) : `Uh oh!`;
   return (
-    <div>
+    <Fragment>
       <Head>
         <title>/home/huy/{repo}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="w-[600px] mx-auto">
-        <h1 className="font-bold text-4xl mt-10">{repo}: Development Log</h1>
-        <div className="my-2 text-gray-500"><Link href={`https://github.com/huytd/${repo}`}>{`https://github.com/huytd/${repo}`}</Link></div>
+      <main className="container-center my-10">
+        <h1 className="font-bold text-4xl mt-10 border-none">{repo}: Development Log</h1>
+        <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
         <div className="github-theme my-10" dangerouslySetInnerHTML={{__html: content}}></div>
       </main>
-    </div>
+    </Fragment>
   )
 }
 
