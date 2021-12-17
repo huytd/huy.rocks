@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </div>
     </div>
     <Component {...pageProps} />
-    <footer className="flex justify-center items-center h-16 text-gray-500 text-sm">
+    <footer className="flex justify-center items-center h-16 bg-gray-100 text-gray-500 text-sm">
       <div className="container-center center-horizontal">
       </div>
     </footer>

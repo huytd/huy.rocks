@@ -561,7 +561,6 @@
 .github-theme kbd {
   display: inline-block;
   padding: 3px 5px;
-  font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
   line-height: 10px;
   color: #444d56;
   vertical-align: middle;
@@ -604,6 +603,7 @@
 .github-theme ul {
   margin-top: 0;
   margin-bottom: 16px;
+  line-height: 1.65rem;
 }
 
 .github-theme hr {
