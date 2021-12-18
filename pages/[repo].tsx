@@ -45,17 +45,11 @@ const Devlog: NextPage = ({ data, repo }: InferGetServerSidePropsType<typeof get
 
   const content = repo ? marked.parse(data).replace(/src=\"(.\/)?/g, `src="https://github.com/huytd/${repo}/raw/master/`) : `Uh oh!`;
   return (
-    <Fragment>
-      <Head>
-        <title>/home/huy/{repo}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="container-center my-10">
-        <h1 className="font-bold text-4xl mt-10 border-none">{repo}: Development Log</h1>
-        <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
-        <div className="github-theme my-10" dangerouslySetInnerHTML={{__html: content}}></div>
-      </main>
-    </Fragment>
+    <main className="container-center my-10">
+      <h1 className="font-bold text-4xl mt-10 border-none">{repo}: Development Log</h1>
+      <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
+      <div className="github-theme my-10" dangerouslySetInnerHTML={{ __html: content }}></div>
+    </main>
   )
 }
 
