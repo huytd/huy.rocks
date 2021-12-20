@@ -21,6 +21,7 @@ const Home: NextPage = () => {
       <ul>
         <li>-&gt; <Link href="/ascii-d"><a className="font-bold">ASCII-d</a></Link>: <i>Cross-platform ASCII diagram drawing application</i></li>
         <li>-&gt; <Link href="/snarkyterm"><a className="font-bold">SnarkyTerm</a></Link>: <i>A terminal emulator written in Rust and WGPU</i></li>
+        <li>-&gt; <Link href="/web-debugger"><a className="font-bold">Web Debugger</a></Link>: <i>A Web-based JavaScript debugger</i></li>
       </ul>
       <p>{"Most of my other projects doesn't have a DEVLOG, but please feel free to check them on GitHub."}</p>
     </main>
