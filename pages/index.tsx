@@ -5,7 +5,7 @@ import { Fragment } from 'react'
 
 const Home: NextPage = () => {
   return (
-    <main className="container-center github-theme my-10 min-h-full flex-1">
+    <main className="container-center github-theme no-list my-10 min-h-full flex-1">
       <p>{"Hello! I'm Huy! Look like you've found my space on the internet."}</p>
 
       <h2>Contact</h2>

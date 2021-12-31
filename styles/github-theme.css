@@ -949,6 +949,6 @@
   vertical-align: middle;
 }
 
-.github-theme ul {
+.github-theme:not(.no-list) ul {
   list-style: circle;
 }
