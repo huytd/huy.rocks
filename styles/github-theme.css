@@ -948,3 +948,7 @@
   margin: 0 0.2em 0.25em -1.6em;
   vertical-align: middle;
 }
+
+.github-theme ul {
+  list-style: circle;
+}
