@@ -1,8 +1,8 @@
 import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
-import Head from 'next/head'
 import { marked } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 import Link from 'next/link';
-import { Fragment } from 'react';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let repo = context.params?.repo ?? null;
@@ -31,7 +31,11 @@ const Devlog: NextPage = ({ data, repo }: InferGetServerSidePropsType<typeof get
   const renderer = new marked.Renderer();
   marked.setOptions({
     gfm: true,
-    renderer: renderer
+    renderer: renderer,
+    highlight: function(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    }
   });
   renderer.heading = function(text, level) {
     var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
