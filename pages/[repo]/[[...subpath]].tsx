@@ -94,6 +94,8 @@ const Devlog: NextPage = ({ data, repo, subpath }: InferGetServerSidePropsType<t
       let linkToOthersMarkdown = linkToOthers.map(link => `- [${link?.title}](/${repo}/${link?.slug})`);
       markdown += "\n\n" + `## Read more\n\n${linkToOthersMarkdown.join("\n")}`;
       content = marked.parse(markdown);
+    } else {
+      content = marked.parse(`Hey! Look like you have lost your way, consider [going back](/${repo})?`);
     }
   } else {
     content = marked.parse(data);
