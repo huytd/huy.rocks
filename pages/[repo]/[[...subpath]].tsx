@@ -3,6 +3,7 @@ import { marked } from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import Link from 'next/link';
+import { cachedFetch } from '../../utils/fetch';
 
 interface Day {
   title: string;
@@ -15,13 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let subpath = context.params?.subpath ?? null;
   let data = "";
   if (repo) {
-    const req = await fetch(`https://api.github.com/repos/huytd/${repo}/contents/DEVLOG.md`);
-    const result = await req.json();
-    if (result?.content) {
-      const buffer = new Buffer(result.content, 'base64');
-      const content = buffer.toString('utf-8');
-      data = content;
-    }
+    data = await cachedFetch(`https://raw.githubusercontent.com/huytd/${repo}/master/DEVLOG.md`);
   }
   if (data && repo) {
     return {
@@ -87,10 +82,13 @@ const Devlog: NextPage = ({ data, repo, subpath }: InferGetServerSidePropsType<t
     }
     days.push(currentDay);
 
-    const matchedDay = days.find(day => day?.slug.match(subpath));
-    if (matchedDay) {
-      let markdown = `# ${matchedDay.title}\n\n${matchedDay.tokens.join("")}`;
-      let linkToOthers = days.filter(day => !day?.slug.match(subpath));
+    const matchedIndex = days.findIndex(day => day?.slug.match(subpath));
+    if (matchedIndex !== -1) {
+      const matchedDay = days[matchedIndex];
+      let markdown = `# ${matchedDay!.title}\n\n${matchedDay!.tokens.join("")}`;
+      const otherStart = Math.max(matchedIndex - 3, 0);
+      const otherEnd = otherStart + 6;
+      let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
       let linkToOthersMarkdown = linkToOthers.map(link => `- [${link?.title}](/${repo}/${link?.slug})`);
       markdown += "\n\n" + `## Read more\n\n${linkToOthersMarkdown.join("\n")}`;
       content = marked.parse(markdown);
@@ -105,7 +103,7 @@ const Devlog: NextPage = ({ data, repo, subpath }: InferGetServerSidePropsType<t
 
   return (
     <main className="container-center my-10">
-      <h1 className="font-bold text-4xl mt-10 border-none">{repo}: Development Log</h1>
+      <h1 className="font-bold text-4xl mt-10 border-none"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
       <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
       <div className="github-theme my-10" dangerouslySetInnerHTML={{ __html: content }}></div>
     </main>
