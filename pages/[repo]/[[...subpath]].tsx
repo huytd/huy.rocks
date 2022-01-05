@@ -1,4 +1,4 @@
-import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
+import type { GetServerSideProps, GetStaticPaths, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage } from 'next'
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
@@ -11,7 +11,14 @@ interface Day {
   tokens: string[]
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking'
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
   let repo = context.params?.repo ?? null;
   let subpath = context.params?.subpath ?? null;
   let data = "";
@@ -20,6 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   if (data && repo) {
     return {
+      revalidate: 4 * 60 * 60,
       props: { data, repo, subpath }
     }
   } else {
@@ -29,17 +37,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 }
 
-const Devlog: NextPage = ({ data, repo, subpath }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Devlog: NextPage = ({ data, repo, subpath }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const renderer = new marked.Renderer();
   marked.setOptions({
     gfm: true,
     renderer: renderer,
-    highlight: function(code, lang) {
+    highlight: function (code, lang) {
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
       return hljs.highlight(code, { language }).value;
     }
   });
-  renderer.heading = function(text, level) {
+  renderer.heading = function (text, level) {
     var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
     if (level === 1) {
       return '<h' + level + '><a class="font-bold" name="' +
