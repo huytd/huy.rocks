@@ -52,5 +52,6 @@
     html,
     body {
         @apply min-h-screen;
+        font-variant-numeric: slashed-zero;
     }
 }
