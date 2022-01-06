@@ -3,6 +3,7 @@ import { marked } from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import Link from 'next/link';
+import Head from 'next/head';
 import { cachedFetch } from '../../utils/fetch';
 
 interface Day {
@@ -67,6 +68,7 @@ const Devlog: NextPage = ({ data, repo, subpath }: InferGetStaticPropsType<typeo
   };
 
   let content = "";
+  let postTitle = "";
 
   if (subpath) {
     const tokens = marked.lexer(data);
@@ -93,6 +95,7 @@ const Devlog: NextPage = ({ data, repo, subpath }: InferGetStaticPropsType<typeo
     const matchedIndex = days.findIndex(day => day?.slug.match(subpath));
     if (matchedIndex !== -1) {
       const matchedDay = days[matchedIndex];
+      postTitle = matchedDay?.title ?? "";
       let markdown = `# ${matchedDay!.title}\n\n${matchedDay!.tokens.join("")}`;
       const otherStart = Math.max(matchedIndex - 3, 0);
       const otherEnd = otherStart + 6;
@@ -110,11 +113,16 @@ const Devlog: NextPage = ({ data, repo, subpath }: InferGetStaticPropsType<typeo
   content = content.replace(/src=\"(.\/)?/g, `src="https://github.com/huytd/${repo}/raw/master/`);
 
   return (
-    <main className="container-center my-10">
-      <h1 className="font-bold text-4xl mt-10 border-none"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
-      <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
-      <div className="github-theme my-10" dangerouslySetInnerHTML={{ __html: content }}></div>
-    </main>
+    <>
+      <Head>
+        <title>/home/huy/{repo}{postTitle ? ` | ${postTitle}` : ''}</title>
+      </Head>
+      <main className="container-center my-10">
+        <h1 className="font-bold text-4xl mt-10 border-none"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
+        <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
+        <div className="github-theme my-10" dangerouslySetInnerHTML={{ __html: content }}></div>
+      </main>
+    </>
   )
 }
 

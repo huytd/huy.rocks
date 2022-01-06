@@ -4,7 +4,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "node sitemap-generator.js",
     "start": "next start",
     "lint": "next lint"
   },
