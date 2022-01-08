@@ -1,10 +1,13 @@
 import type { GetServerSideProps, GetStaticPaths, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage } from 'next'
 import { marked } from 'marked';
 import hljs from 'highlight.js';
+import hljsZig from '../../utils/zig';
 import 'highlight.js/styles/github.css';
 import Link from 'next/link';
 import Head from 'next/head';
 import { cachedFetch } from '../../utils/fetch';
+
+hljs.registerLanguage("zig", hljsZig);
 
 interface Day {
   title: string;
