@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
   if (data && repo) {
     return {
-      revalidate: clearCache ? 0 : 4 * 60 * 60,
+      revalidate: clearCache ? 1 : 4 * 60 * 60,
       props: { data, repo, subpath }
     }
   } else {
