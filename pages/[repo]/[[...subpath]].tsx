@@ -25,13 +25,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   let repo = context.params?.repo ?? null;
   let subpath = context.params?.subpath ?? null;
+  let clearCache = context.params?.clearCache ?? null;
   let data = "";
   if (repo) {
     data = await cachedFetch(`https://raw.githubusercontent.com/huytd/${repo}/master/DEVLOG.md`);
   }
   if (data && repo) {
     return {
-      revalidate: 4 * 60 * 60,
+      revalidate: clearCache ? 0 : 4 * 60 * 60,
       props: { data, repo, subpath }
     }
   } else {
