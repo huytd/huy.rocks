@@ -13,6 +13,7 @@ interface Day {
   title: string;
   slug: string;
   tokens: string[]
+  rawTokens: marked.Token[]
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -79,44 +80,62 @@ const Devlog: NextPage = ({ data, repo, subpath }: InferGetStaticPropsType<typeo
   let content = "";
   let postTitle = "";
 
-  if (subpath) {
-    const tokens = marked.lexer(data);
-    const days = [];
-    let currentDay = null;
-    for (let token of tokens) {
-      if (token.type === "heading" && token.depth === 1) {
-        if (currentDay !== null) {
-          days.push(currentDay);
-        }
-        currentDay = {
-          title: token.text,
-          slug: token.text.toLowerCase().replace(/[^\w]+/g, '-'),
-          tokens: []
-        } as Day;
-      } else {
-        if (currentDay !== null) {
-          currentDay.tokens.push(token.raw);
-        }
+  const tokens = marked.lexer(data);
+  const days: Day[] = [];
+  let currentDay: Day | null = null;
+  for (let token of tokens) {
+    if (token.type === "heading" && token.depth === 1) {
+      if (currentDay !== null) {
+        days.push(currentDay);
+      }
+      currentDay = {
+        title: token.text,
+        slug: token.text.toLowerCase().replace(/[^\w]+/g, '-'),
+        tokens: [],
+        rawTokens: []
+      } as Day;
+    } else {
+      if (currentDay !== null) {
+        currentDay.tokens.push(token.raw);
+        currentDay.rawTokens.push(token);
       }
     }
-    days.push(currentDay);
+  }
+  if (currentDay) days.push(currentDay);
 
+  const getPostFrom = (matchedDay: Day, matchedIndex: number) => {
+    let markdown = `# ${matchedDay!.title}\n\n${matchedDay!.tokens.join("")}`;
+    const otherStart = Math.max(matchedIndex - 3, 0);
+    const otherEnd = otherStart + 6;
+    let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
+    let linkToOthersMarkdown = linkToOthers.map(link => `- [${link?.title}](/${repo}/${link?.slug})`);
+    markdown += "\n\n" + `## Read more\n\n${linkToOthersMarkdown.join("\n")}`;
+    return markdown;
+  };
+
+  if (subpath) {
     const matchedIndex = days.findIndex(day => day?.slug.match(subpath));
     if (matchedIndex !== -1) {
       const matchedDay = days[matchedIndex];
       postTitle = matchedDay?.title ?? "";
-      let markdown = `# ${matchedDay!.title}\n\n${matchedDay!.tokens.join("")}`;
-      const otherStart = Math.max(matchedIndex - 3, 0);
-      const otherEnd = otherStart + 6;
-      let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
-      let linkToOthersMarkdown = linkToOthers.map(link => `- [${link?.title}](/${repo}/${link?.slug})`);
-      markdown += "\n\n" + `## Read more\n\n${linkToOthersMarkdown.join("\n")}`;
+      const markdown = getPostFrom(matchedDay, matchedIndex);
       content = marked.parse(markdown);
     } else {
       content = marked.parse(`Hey! Look like you have lost your way, consider [going back](/${repo})?`);
     }
   } else {
-    content = marked.parse(data);
+    const posts = days.map(day => {
+      let content = day
+        .rawTokens
+        .filter(t => t.type === "text" || t.type === "paragraph" || t.type === "link" || t.type === "strong" || t.type === "em" || t.type === "space");
+      return {
+        title: day.title,
+        slug: day.slug,
+        content: content.slice(0, 4).map(t => t.raw).join("").trimEnd().replace(/:$/, '') + (content.length > 4 ? "..." : "")
+      }
+    })
+    .map(post => `# ${post.title}\n\n${post.content}\n\n[Read more ->](/${repo}/${post.slug})`).join("\n\n---\n\n");
+    content = marked.parse(posts);
   }
 
   content = content.replace(/src=\"(.\/)?/g, `src="https://github.com/huytd/${repo}/raw/master/`);
