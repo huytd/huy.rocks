@@ -1,22 +1,15 @@
 import { GetServerSideProps } from "next";
-import { marked } from 'marked';
-import { ENABLED_PROJECTS, SITE_URL } from "../utils/consts";
+import { SITE_URL } from "../utils/consts";
+import { DataService } from "../utils/data";
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     if (res) {
         let sitemap = [`${SITE_URL}/`];
 
-        for (let project of ENABLED_PROJECTS) {
-            sitemap.push(`${SITE_URL}/${project}`);
-            const res = await fetch(`https://raw.githubusercontent.com/huytd/${project}/master/DEVLOG.md`);
-            const data = await res.text();
-            const tokens = marked.lexer(data);
-            for (let token of tokens) {
-                if (token.type === "heading" && token.depth === 1) {
-                    const slug = token.text.toLowerCase().replace(/[^\w]+/g, '-');
-                    sitemap.push(`${SITE_URL}/${project}/${slug}`);
-                }
-            }
+        const posts = await DataService.allPosts();
+
+        for (let {project, slug} of posts) {
+            sitemap.push(`${SITE_URL}/${project}/${slug}`);
         }
 
         res.setHeader('Content-type', 'text/plain');

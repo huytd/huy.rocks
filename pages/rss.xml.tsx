@@ -1,8 +1,8 @@
 import { GetServerSideProps } from "next";
-import { marked } from 'marked';
-import { ENABLED_PROJECTS, SITE_URL } from "../utils/consts";
+import { SITE_URL } from "../utils/consts";
 import { Feed } from 'feed';
 import dayjs from 'dayjs'
+import { DataService } from "../utils/data";
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     if (res) {
@@ -15,24 +15,17 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
             language: "en",
         });
 
-        for (let project of ENABLED_PROJECTS) {
-            const res = await fetch(`https://raw.githubusercontent.com/huytd/${project}/master/DEVLOG.md`);
-            const data = await res.text();
-            const tokens = marked.lexer(data);
-            for (let token of tokens) {
-                if (token.type === "heading" && token.depth === 1) {
-                    const postTitle = token.text;
-                    const slug = postTitle.toLowerCase().replace(/[^\w]+/g, '-');
-                    const postUrl = `${SITE_URL}/${project}/${slug}`;
-                    const postDate = dayjs(postTitle.split('-')[0].trim());
-                    if (postDate.isValid()) {
-                        feed.addItem({
-                            title: postTitle,
-                            link: postUrl,
-                            date: postDate.toDate()
-                        });
-                    }
-                }
+        const posts = await DataService.allPosts();
+
+        for (let post of posts) {
+            const postUrl = `${SITE_URL}/${post.project}/${post.slug}`;
+            const postDate = dayjs(post.title.split('-')[0].trim());
+            if (postDate.isValid()) {
+                feed.addItem({
+                    title: post.title,
+                    link: postUrl,
+                    date: postDate.toDate()
+                });
             }
         }
 
