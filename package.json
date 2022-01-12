@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@types/marked": "^4.0.1",
+    "dayjs": "^1.10.7",
+    "feed": "^4.2.2",
     "highlight.js": "^11.3.1",
     "marked": "^4.0.7",
     "memory-cache": "^0.2.0",
