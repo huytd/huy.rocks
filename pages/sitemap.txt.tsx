@@ -4,7 +4,7 @@ import { DataService } from "../utils/data";
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     if (res) {
-        let sitemap = [`${SITE_URL}/`];
+        let sitemap = [];
 
         const posts = await DataService.allPosts();
 
