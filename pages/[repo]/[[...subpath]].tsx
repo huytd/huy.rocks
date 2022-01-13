@@ -104,7 +104,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
   };
 
   let content = marked.parse(markdown);
-  content = content.replace(/src=\"(.\/)?/g, `src="https://github.com/huytd/${repo}/raw/master/`);
+  content = content.replace(/src=\"(.\/)?/g, `src="https://raw.githubusercontent.com/huytd/${repo}/master/`);
 
   return (
     <>
