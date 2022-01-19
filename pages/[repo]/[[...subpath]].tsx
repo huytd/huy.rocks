@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   if (markdown && repo) {
     return {
-      revalidate: reload ? 1 : 4 * 60 * 60,
+      revalidate: reload ? 1 : 60 * 60,
       props: { markdown, postTitle, repo, subpath }
     }
   } else {
