@@ -62,9 +62,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     .map(post => `# ${post.title}\n\n${post.content}\n\n[Read more ->](/${repo}/${post.slug})`).join("\n\n---\n\n");
   }
 
+  const isDevEnv = process.env.NODE_ENV === 'development';
   if (markdown && repo) {
     return {
-      revalidate: reload ? 1 : 60 * 60,
+      revalidate: (reload || isDevEnv) ? 1 : 60 * 60,
       props: { markdown, postTitle, repo, subpath }
     }
   } else {
@@ -106,6 +107,17 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
   let content = marked.parse(markdown);
   content = content.replace(/src=\"(.\/)?/g, `src="https://raw.githubusercontent.com/huytd/${repo}/master/`);
 
+  const loadScript = `
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  `;
+
   return (
     <>
       <Head>
@@ -116,6 +128,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
         <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
         <div className="github-theme my-10" dangerouslySetInnerHTML={{ __html: content }}></div>
       </main>
+      <script dangerouslySetInnerHTML={{__html: loadScript}}></script>
     </>
   )
 }

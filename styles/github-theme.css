@@ -603,7 +603,7 @@
 .github-theme ul {
   margin-top: 0;
   margin-bottom: 16px;
-  line-height: 1.65rem;
+  line-height: 1.75rem;
 }
 
 .github-theme hr {
@@ -951,4 +951,15 @@
 
 .github-theme:not(.no-list) ul {
   list-style: circle;
+}
+
+/* Mathjax */
+
+mjx-container[jax="SVG"] {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+mjx-container[jax="SVG"] > svg {
+  margin: 0 auto;
 }

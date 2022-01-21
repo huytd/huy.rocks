@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <title>/home/huy{page ? "/" + page : ""}</title>
       <link rel="icon" href="/favicon.ico" />
       <script async defer data-domain="huy.rocks" src="https://analytics.huy.rocks/js/plausible.js"></script>
+      <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     </Head>
     <div className="flex justify-center items-center bg-gray-100 h-16">
       <div className="container-center center-horizontal text-slate-500 font-bold">
