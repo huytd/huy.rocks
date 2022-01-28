@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         content: content.slice(0, 4).map(t => t.raw).join("").trimEnd().replace(/:$/, '') + (content.length > 4 ? "..." : "")
       }
     })
-    .map(post => `# ${post.title}\n\n${post.content}\n\n[Read more ->](/${repo}/${post.slug})`).join("\n\n---\n\n");
+    .map(post => `# ${post.title}\n\n${post.content}\n\n[Read more ->](/${repo}/${post.slug})`).join("\n\n\n");
   }
 
   const isDevEnv = process.env.NODE_ENV === 'development';
