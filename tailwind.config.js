@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['Inter', ...defaultTheme.fontFamily.sans],
-        'mono': ['JetBrains Mono', ...defaultTheme.fontFamily.mono]
+        'mono': ['Iosevka Mono', ...defaultTheme.fontFamily.mono]
       },
       keyframes: {
         blink: {
