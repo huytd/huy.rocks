@@ -4,8 +4,8 @@ import hljs from 'highlight.js';
 import hljsZig from '../../utils/zig';
 import 'highlight.js/styles/github.css';
 import Link from 'next/link';
-import Head from 'next/head';
 import { DataService } from '../../utils/data';
+import { CommonSEO } from '../../components/SEO';
 
 hljs.registerLanguage("zig", hljsZig);
 
@@ -118,11 +118,11 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
     };
   `;
 
+  const pageTitle = "/home/huy/" + repo + (postTitle ? ` | ${postTitle}` : "");
+
   return (
     <>
-      <Head>
-        <title>/home/huy/{repo}{postTitle ? ` | ${postTitle}` : ''}</title>
-      </Head>
+      <CommonSEO title={pageTitle} description={postTitle} ogType={'article'} ogImage={'https://huy.rocks/social-image.png'}/>
       <main className="container-center my-10">
         <h1 className="font-bold text-4xl mt-10 border-none"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
         <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
