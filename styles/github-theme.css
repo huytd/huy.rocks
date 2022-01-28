@@ -758,12 +758,16 @@
   padding: 0.2em 0.4em;
   margin: 0;
   font-size: 85%;
-  background-color: rgba(27, 31, 35, 0.05);
+  background-color: #f6f8fa55;
   border-radius: 3px;
 }
 
 .github-theme pre {
   word-wrap: normal;
+}
+
+.github-theme p > code {
+  color: #066;
 }
 
 .github-theme pre > code {
@@ -791,7 +795,8 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.6;
-  background-color: #f6f8fa;
+  background-color: #f4f4f922;
+  border: 1px solid #dfe2e533;
   border-radius: 3px;
 }
 

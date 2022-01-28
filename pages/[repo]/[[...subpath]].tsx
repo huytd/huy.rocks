@@ -2,7 +2,7 @@ import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage 
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 import hljsZig from '../../utils/zig';
-import 'highlight.js/styles/github.css';
+import 'highlight.js/styles/googlecode.css';
 import Link from 'next/link';
 import { DataService } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';
