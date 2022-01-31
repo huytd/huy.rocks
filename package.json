@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/marked": "^4.0.1",
+    "canvas": "^2.9.0",
     "dayjs": "^1.10.7",
     "feed": "^4.2.2",
     "highlight.js": "^11.3.1",

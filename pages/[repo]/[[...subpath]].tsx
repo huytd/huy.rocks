@@ -6,6 +6,7 @@ import 'highlight.js/styles/googlecode.css';
 import Link from 'next/link';
 import { DataService } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';
+import { base64_encode } from '../../utils/base64';
 
 hljs.registerLanguage("zig", hljsZig);
 
@@ -126,9 +127,11 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
     .join(" ")
     .substr(0, 157) + "...";
 
+  const socialImage = postTitle ? `https://huy.rocks/api/image?t=${base64_encode(postTitle)}` : 'https://huy.rocks/social-image.png';
+
   return (
     <>
-      <CommonSEO title={pageTitle} description={description} ogType={'article'} ogImage={'https://huy.rocks/social-image.png'}/>
+      <CommonSEO title={pageTitle} description={description} ogType={'article'} ogImage={socialImage}/>
       <main className="container-center my-10">
         <h1 className="font-bold text-4xl mt-10 border-none"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
         <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
