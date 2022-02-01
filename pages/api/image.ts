@@ -52,24 +52,23 @@ export default function handler(
 
   ctx.fillStyle = '#F7F8FB';
   ctx.fillRect(0, 0, IMG_WIDTH, IMG_HEIGHT);
-  ctx.textBaseline = "top";
 
   ctx.font = "bold 35px Inter";
   ctx.fillStyle = '#253A59';
-  ctx.fillText("->", 70, 70);
-  ctx.fillText("/huy/rocks", 216, 70);
+  ctx.fillText("->", 70, 95);
+  ctx.fillText("/huy/rocks", 216, 95);
 
   ctx.font = "35px Inter";
   ctx.fillStyle = '#AAB7CA';
-  ctx.fillText("/home", 111, 70);
+  ctx.fillText("/home", 111, 95);
 
   ctx.font = "bold 48px Inter";
   ctx.fillStyle = '#AAB7CA';
-  ctx.fillText(date, 70, 240);
+  ctx.fillText(date, 70, 290);
 
   ctx.font = "bold 72px Inter";
   ctx.fillStyle = '#253A59';
-  wrapText(ctx, title, 70, 300, IMG_WIDTH - 80, 82);
+  wrapText(ctx, title, 70, 370, IMG_WIDTH - 80, 82);
 
   res.setHeader('Content-Type', 'image/png');
   res.send(canvas.toBuffer('image/png'));
