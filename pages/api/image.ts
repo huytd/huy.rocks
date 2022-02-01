@@ -1,12 +1,11 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { createCanvas, registerFont, CanvasRenderingContext2D } from 'canvas';
+import { createCanvas, GlobalFonts, SKRSContext2D } from '@napi-rs/canvas';
 import { base64_decode } from '../../utils/base64';
 
 const IMG_WIDTH = 1200;
 const IMG_HEIGHT = 600;
 
-function wrapText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
+function wrapText(context: SKRSContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
   var words = text.split(' ');
   var line = '';
 
@@ -26,6 +25,8 @@ function wrapText(context: CanvasRenderingContext2D, text: string, x: number, y:
   context.fillText(line, x, y);
 }
 
+GlobalFonts.registerFromPath("public/fonts/Inter-Regular.ttf");
+GlobalFonts.registerFromPath("public/fonts/Inter-Bold.ttf");
 
 export default function handler(
   req: NextApiRequest,
@@ -42,18 +43,12 @@ export default function handler(
   date = date || "huy.rocks";
   title = title || "everyday learning";
 
-  registerFont("public/fonts/Inter-Regular.ttf", {
-    family: "Inter",
-    weight: "normal"
-  });
-  registerFont("public/fonts/Inter-Bold.ttf", {
-    family: "Inter",
-    weight: "bold"
-  });
-
   const canvas = createCanvas(IMG_WIDTH, IMG_HEIGHT);
   const ctx = canvas.getContext("2d");
-  ctx.filter = 'best';
+
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
   ctx.fillStyle = '#F7F8FB';
   ctx.fillRect(0, 0, IMG_WIDTH, IMG_HEIGHT);
   ctx.textBaseline = "top";

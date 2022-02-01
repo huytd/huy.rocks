@@ -4,13 +4,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "vercel-build": "yum install libuuid-devel libmount-devel zlib && cp /lib64/{libuuid,libmount,libblkid,libz}.so.1 node_modules/canvas/build/Release/ && npm run build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.19",
     "@types/marked": "^4.0.1",
-    "canvas": "^2.9.0",
     "dayjs": "^1.10.7",
     "feed": "^4.2.2",
     "highlight.js": "^11.3.1",
