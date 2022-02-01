@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { createCanvas, GlobalFonts, SKRSContext2D } from '@napi-rs/canvas';
 import { base64_decode } from '../../utils/base64';
+import { resolve } from 'path';
 
 const IMG_WIDTH = 1200;
 const IMG_HEIGHT = 600;
@@ -25,8 +26,8 @@ function wrapText(context: SKRSContext2D, text: string, x: number, y: number, ma
   context.fillText(line, x, y);
 }
 
-GlobalFonts.registerFromPath("public/fonts/Inter-Regular.ttf");
-GlobalFonts.registerFromPath("public/fonts/Inter-Bold.ttf");
+GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'Inter-Regular.ttf'));
+GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'Inter-Bold.ttf'));
 
 export default function handler(
   req: NextApiRequest,
