@@ -27,6 +27,7 @@ export const CommonSEO = ({ title, description, ogType, ogImage }: CommonSEOProp
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={ogImage} />
+            <link rel="canonical" href={`${SITE_URL}${router.asPath}`} />
         </Head>
     )
 };
