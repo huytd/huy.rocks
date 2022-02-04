@@ -13,6 +13,7 @@
     "dayjs": "^1.10.7",
     "feed": "^4.2.2",
     "highlight.js": "^11.3.1",
+    "highlightjs-focus": "^1.0.0",
     "lru-cache": "^6.0.0",
     "marked": "^4.0.7",
     "next": "12.0.7",

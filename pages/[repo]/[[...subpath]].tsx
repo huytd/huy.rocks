@@ -2,7 +2,8 @@ import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage 
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 import hljsZig from '../../utils/zig';
-import 'highlight.js/styles/googlecode.css';
+import { LineFocusPlugin } from 'highlightjs-focus';
+import 'highlight.js/styles/arduino-light.css';
 import Link from 'next/link';
 import { DataService } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';
@@ -78,11 +79,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const renderer = new marked.Renderer();
+  hljs.addPlugin(new LineFocusPlugin({
+      unfocusedStyle: {
+          opacity: "0.25",
+          filter: "grayscale(1)"
+      }
+  }));
   marked.setOptions({
     gfm: true,
     renderer: renderer,
     highlight: function (code, lang) {
-      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      const language = lang || 'plaintext';
       return hljs.highlight(code, { language }).value;
     }
   });
