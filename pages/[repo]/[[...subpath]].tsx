@@ -81,7 +81,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
   const renderer = new marked.Renderer();
   hljs.addPlugin(new LineFocusPlugin({
       unfocusedStyle: {
-          opacity: "0.25",
+          opacity: "0.35",
           filter: "grayscale(1)"
       }
   }));
