@@ -3,7 +3,7 @@ import { marked } from 'marked';
 import hljs from 'highlight.js';
 import hljsZig from '../../utils/zig';
 import { LineFocusPlugin } from 'highlightjs-focus';
-import 'highlight.js/styles/arduino-light.css';
+import 'highlight.js/styles/base16/equilibrium-light.css';
 import Link from 'next/link';
 import { DataService } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';

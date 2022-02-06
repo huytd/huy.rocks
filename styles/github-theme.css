@@ -795,7 +795,8 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.6;
-  background-color: #f4f4f922;
+  /* background-color: #f4f4f922; */
+  background-color: #faf8f544;
   border: 1px solid #dfe2e555;
   border-radius: 3px;
 }
@@ -978,7 +979,7 @@ mjx-container[jax="SVG"] > svg {
 }
 
 .github-theme .hljs-focus.focused {
-  border-left: 2px solid #ffeaa7;
-  border-right: 2px solid #ffeaa7;
-  background: #ffeaa755;
+  border-left: 2px solid #dad8d688;
+  border-right: 2px solid #dad8d688;
+  background: #f5f3f0aa;
 }
