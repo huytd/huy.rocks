@@ -135,10 +135,11 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
     .substr(0, 157) + "...";
 
   const socialImage = postTitle ? `https://huy.rocks/api/image?t=${base64_encode(postTitle)}` : 'https://huy.rocks/social-image.png';
+  const shouldIgnoreIndex = !subpath.length;
 
   return (
     <>
-      <CommonSEO title={pageTitle} description={description} ogType={'article'} ogImage={socialImage}/>
+      <CommonSEO title={pageTitle} description={description} ogType={'article'} ogImage={socialImage} noIndex={shouldIgnoreIndex}/>
       <main className="container-center my-10">
         <h1 className="font-bold text-4xl mt-10 border-none"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
         <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
