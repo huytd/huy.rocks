@@ -51,17 +51,56 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   } else {
     // List all posts
-    markdown = days.filter(day => day.project === repo).map(day => {
-      let content = day
-        .rawTokens
-        .filter(t => t.type === "text" || t.type === "paragraph" || t.type === "link" || t.type === "strong" || t.type === "em" || t.type === "space");
-      return {
-        title: day.title,
-        slug: day.slug,
-        content: content.slice(0, 4).map(t => t.raw).join("").trimEnd().replace(/:$/, '') + (content.length > 4 ? "..." : "")
-      }
-    })
-    .map(post => `# ${post.title}\n\n${post.content}\n\n[Read more ->](/${repo}/${post.slug})`).join("\n\n\n");
+    if (repo === "everyday") {
+      type PostEntry = {
+        date: string,
+        title: string,
+        fullTitle: string,
+        category: string,
+        slug: string
+      };
+
+      const posts: PostEntry[] = days.filter(day => day.project === repo).map(day => {
+        const [date, fullTitle] = day.title.split(" - ");
+        const [category, title] = fullTitle?.split("/");
+        return {
+          date,
+          title,
+          fullTitle,
+          category,
+          slug: day.slug,
+        }
+      });
+
+      markdown = `### Recently Added\n\n${posts.slice(0, 5).map(post => `<span class="post-date">${post.date}</span> [${post.fullTitle}](/${repo}/${post.slug})`).join("\n")}`;
+
+      const categories = posts.reduce((map: Map<string, PostEntry[]>, post) => {
+        const key = post.category.toUpperCase();
+        let list = map.get(key);
+        if (list !== undefined) {
+          list.push(post);
+        } else {
+          map.set(key, [post]);
+        }
+        return map;
+      }, new Map());
+
+      markdown += "\n\n### Posts by categories\n"
+      categories.forEach((posts, key) => {
+        markdown += `\n\n**${key}**\n\n${posts.slice(0, 5).map(post => `<span class="post-date">${post.date}</span> [${post.title}](/${repo}/${post.slug})`).join("\n")}`;
+      });
+    } else {
+      markdown = days.filter(day => day.project === repo).map(day => {
+        let content = day
+          .rawTokens
+          .filter(t => t.type === "text" || t.type === "paragraph" || t.type === "link" || t.type === "strong" || t.type === "em" || t.type === "space");
+        return {
+          title: day.title,
+          slug: day.slug,
+          content: content.slice(0, 4).map(t => t.raw).join("").trimEnd().replace(/:$/, '') + (content.length > 4 ? "..." : "")
+        }
+      }).map(post => `# ${post.title}\n\n${post.content}\n\n[Read more ->](/${repo}/${post.slug})`).join("\n\n\n");
+    }
   }
 
   const isDevEnv = process.env.NODE_ENV === 'development';
@@ -77,16 +116,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 }
 
+
 const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const renderer = new marked.Renderer();
   hljs.addPlugin(new LineFocusPlugin({
-      unfocusedStyle: {
-          opacity: "0.35",
-          filter: "grayscale(1)"
-      }
+    unfocusedStyle: {
+      opacity: "0.35",
+      filter: "grayscale(1)"
+    }
   }));
   marked.setOptions({
     gfm: true,
+    breaks: true,
+    smartypants: true,
     renderer: renderer,
     highlight: function (code, lang) {
       const language = lang || 'plaintext';
@@ -139,13 +181,13 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
 
   return (
     <>
-      <CommonSEO title={pageTitle} description={description} ogType={'article'} ogImage={socialImage} noIndex={shouldIgnoreIndex}/>
+      <CommonSEO title={pageTitle} description={description} ogType={'article'} ogImage={socialImage} noIndex={shouldIgnoreIndex} />
       <main className="container-center my-10">
         <h1 className="font-bold text-4xl mt-10 border-none"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
         <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
         <div className="github-theme my-10" dangerouslySetInnerHTML={{ __html: content }}></div>
       </main>
-      <script dangerouslySetInnerHTML={{__html: loadScript}}></script>
+      <script dangerouslySetInnerHTML={{ __html: loadScript }}></script>
     </>
   )
 }

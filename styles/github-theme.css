@@ -983,3 +983,8 @@ mjx-container[jax="SVG"] > svg {
   border-right: 2px solid #dad8d688;
   background: #f5f3f0aa;
 }
+
+.github-theme .post-date {
+  @apply mr-5 text-gray-400;
+  font-variant-numeric: tabular-nums slashed-zero;
+}
