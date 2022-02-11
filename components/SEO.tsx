@@ -30,7 +30,6 @@ export const CommonSEO = ({ title, description, ogType, ogImage, noIndex }: Comm
             <meta name="twitter:image" content={ogImage} />
             <link rel="canonical" href={`${SITE_URL}${router.asPath}`} />
             { noIndex ? <meta name="googlebot" content="noindex"/> : null }
-            <meta name="google-site-verification" content="pSprDjtnAmX3XLxQpyoQ8lOTIpXXr9qqVsbl4A4KL4M" />
         </Head>
     )
 };
