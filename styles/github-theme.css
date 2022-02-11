@@ -90,10 +90,6 @@
   font-weight: bolder;
 }
 
-.github-theme h1 {
-  font-size: 2em;
-}
-
 .github-theme img {
   border-style: none;
 }
@@ -218,7 +214,6 @@
 
 .github-theme p {
   margin-top: 0;
-  margin-bottom: 10px;
 }
 
 .github-theme blockquote {
@@ -608,8 +603,8 @@
 .github-theme table,
 .github-theme ul {
   margin-top: 0;
-  margin-bottom: 16px;
-  line-height: 1.45rem;
+  margin-bottom: 1.45em;
+  line-height: 1.5rem;
 }
 
 .github-theme hr {
@@ -648,7 +643,7 @@
 }
 
 .github-theme h1 {
-  font-size: 1.9em;
+  font-size: 2.1em;
 }
 
 .github-theme h1::after {
@@ -656,7 +651,7 @@
     content: " ";
     border-bottom: 1px solid #ccc;
     width: 70px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .github-theme h2 {
@@ -804,7 +799,6 @@
   overflow: auto;
   font-size: 0.87em;
   line-height: 1.6;
-  /* background-color: #f4f4f922; */
   background-color: #faf8f544;
   border: 1px solid #dfe2e555;
   border-radius: 3px;
