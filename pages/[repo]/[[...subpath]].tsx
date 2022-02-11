@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { DataService } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';
 import { base64_encode } from '../../utils/base64';
+import { SITE_URL } from '../../utils/consts';
 
 hljs.registerLanguage("zig", hljsZig);
 
@@ -118,41 +119,54 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 
 const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const renderer = new marked.Renderer();
   hljs.addPlugin(new LineFocusPlugin({
     unfocusedStyle: {
       opacity: "0.35",
       filter: "grayscale(1)"
     }
   }));
+
   marked.setOptions({
     gfm: true,
     breaks: true,
     smartypants: true,
-    renderer: renderer,
     highlight: function (code, lang) {
       const language = lang || 'plaintext';
       return hljs.highlight(code, { language }).value;
     }
   });
-  renderer.heading = function (text, level) {
-    var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-    if (level === 1) {
-      return '<h' + level + '><a class="font-bold" name="' +
-        escapedText +
-        '" href="/' + repo + '/' +
-        escapedText +
-        '">' +
-        text + '</a></h' + level + '>';
-    } else {
-      return '<h' + level + '><a class="font-bold" name="' +
-        escapedText +
-        '" href="#' +
-        escapedText +
-        '">' +
-        text + '</a></h' + level + '>';
-    }
+
+  const customRenderer = {
+      heading: function(
+          text: string,
+          level: 1 | 2 | 3 | 4 | 5 | 6,
+      ) {
+          var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+          if (level === 1) {
+              return '<h' + level + '><a class="font-bold" name="' +
+                  escapedText +
+                  '" href="/' + repo + '/' +
+                  escapedText +
+                  '">' +
+                  text + '</a></h' + level + '>';
+          } else {
+              return '<h' + level + '><a class="font-bold" name="' +
+                  escapedText +
+                  '" href="#' +
+                  escapedText +
+                  '">' +
+                  text + '</a></h' + level + '>';
+          }
+      },
+      link(href: string, title: string, text: string) {
+          if (href.startsWith("http") && href.indexOf(SITE_URL) === -1)  {
+              return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text}<i>↗</i></a>`;
+          }
+          return false;
+      }
   };
+
+  marked.use({ renderer: customRenderer });
 
   let content = marked.parse(markdown);
   content = content.replace(/src=\"(.\/)?/g, `src="https://raw.githubusercontent.com/huytd/${repo}/master/`);

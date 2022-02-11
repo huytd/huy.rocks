@@ -132,12 +132,12 @@ h1 {
   text-decoration: none;
 }
 
-.github-theme p a {
+.github-theme a:hover {
   text-decoration: underline;
 }
 
-.github-theme a:hover {
-  text-decoration: underline;
+.github-theme a.external-link i {
+    @apply text-slate-300 inline-block text-center rounded text-xs border w-4 h-4 ml-1;
 }
 
 .github-theme strong {
