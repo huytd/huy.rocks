@@ -2,6 +2,10 @@
     --font-serif: "Iowan Old Style", "Sitka Text", Palatino, "Book Antiqua", serif;
 }
 
+h1 {
+  font-family: var(--font-serif);
+}
+
 .github-theme .octicon {
   display: inline-block;
   fill: currentColor;
