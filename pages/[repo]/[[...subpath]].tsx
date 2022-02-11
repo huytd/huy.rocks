@@ -63,7 +63,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
       const posts: PostEntry[] = days.filter(day => day.project === repo).map(day => {
         const [date, fullTitle] = day.title.split(" - ");
-        const [category, title] = fullTitle?.split("/");
+        let [category, ...titleParts] = fullTitle?.split("/");
+        let title = titleParts.join("/");
         return {
           date,
           title,
