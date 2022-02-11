@@ -196,7 +196,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
 
   return (
     <>
-      <CommonSEO title={pageTitle} description={description} ogType={'article'} ogImage={socialImage} noIndex={shouldIgnoreIndex} />
+      <CommonSEO title={pageTitle} description={description} ogType={'article'} ogImage={socialImage} />
       <main className="container-center my-10">
       {!subpath && (
         <>
