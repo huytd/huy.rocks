@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       const otherEnd = otherStart + 6;
       let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
       let linkToOthersMarkdown = linkToOthers.map(link => `- [${link?.title}](/${repo}/${link?.slug})`);
-      markdown += "\n\n---\n\n" + `## Read more\n\n${linkToOthersMarkdown.join("\n")}`;
+      markdown += "\n\n" + `## Read more\n\n${linkToOthersMarkdown.join("\n")}`;
       postTitle = matchedDay?.title ?? "";
     } else {
       // Post not found

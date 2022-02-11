@@ -144,15 +144,6 @@ h1 {
   font-weight: 600;
 }
 
-.github-theme hr {
-  height: 0;
-  margin: 15px 0;
-  overflow: hidden;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid #dfe2e5;
-}
-
 .github-theme hr:after,
 .github-theme hr:before {
   display: table;
@@ -559,10 +550,6 @@ h1 {
   padding-left: 128px !important;
 }
 
-.github-theme hr {
-  border-bottom-color: #eee;
-}
-
 .github-theme kbd {
   display: inline-block;
   padding: 3px 5px;
@@ -612,9 +599,10 @@ h1 {
 }
 
 .github-theme hr {
-  height: 0.25em;
+  height: 0.1em;
   padding: 0;
-  margin: 24px 0;
+  margin: 2.4rem auto;
+  width: 50px;
   background-color: #e1e4e8;
   border: 0;
 }
@@ -653,7 +641,7 @@ h1 {
 .github-theme h1::after {
     display: block;
     content: " ";
-    border-bottom: 1px solid #ccc;
+    border-bottom: 0.1rem solid #ccc;
     width: 70px;
     margin-top: 10px;
 }
