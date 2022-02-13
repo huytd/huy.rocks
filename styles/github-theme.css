@@ -622,12 +622,16 @@ h1 {
 }
 
 .github-theme h1,
+.github-theme h2 {
+  font-family: var(--font-serif);
+}
+
+.github-theme h1,
 .github-theme h2,
 .github-theme h3,
 .github-theme h4,
 .github-theme h5,
 .github-theme h6 {
-  font-family: var(--font-serif);
   margin-top: 1.4em;
   margin-bottom: 1.4em;
   font-weight: 600;
@@ -982,4 +986,8 @@ mjx-container[jax="SVG"] > svg {
 .github-theme .post-date {
   @apply mr-5 text-gray-400;
   font-variant-numeric: tabular-nums slashed-zero;
+}
+
+a:target {
+    border-bottom: 0.25em solid #bdffec;
 }

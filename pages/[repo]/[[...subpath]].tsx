@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         }
       });
 
-      markdown = `### Recently Added\n\n${posts.slice(0, 5).map(post => `<span class="post-date">${post.date}</span> [${post.fullTitle}](/${repo}/${post.slug})`).join("\n")}`;
+      markdown = `## Recently Added\n\n${posts.slice(0, 7).map(post => `<span class="post-date">${post.date}</span> [${post.fullTitle}](/${repo}/${post.slug})`).join("\n")}`;
 
       const categories = posts.reduce((map: Map<string, PostEntry[]>, post) => {
         const key = post.category.toUpperCase();
@@ -87,9 +87,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
         return map;
       }, new Map());
 
-      markdown += "\n\n### Posts by categories\n"
+      markdown += "\n\n## Posts by categories\n"
       categories.forEach((posts, key) => {
-        markdown += `\n\n**${key}**\n\n${posts.slice(0, 5).map(post => `<span class="post-date">${post.date}</span> [${post.title}](/${repo}/${post.slug})`).join("\n")}`;
+        markdown += `\n\n### ${key}\n\n${posts.slice(0, 5).map(post => `<span class="post-date">${post.date}</span> [${post.title}](/${repo}/${post.slug})`).join("\n")}`;
       });
     } else {
       markdown = days.filter(day => day.project === repo).map(day => {
