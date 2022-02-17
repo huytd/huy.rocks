@@ -137,7 +137,7 @@ h1 {
 }
 
 .github-theme a.external-link i {
-    @apply text-slate-300 inline-block text-center rounded text-xs border w-4 h-4 ml-1;
+    @apply text-slate-400 inline-block text-center rounded text-xs border w-4 h-4 ml-1;
 }
 
 .github-theme strong {
