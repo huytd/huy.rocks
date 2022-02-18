@@ -15,7 +15,6 @@ const Home: NextPage = () => {
                 <p>{"In case you're interested:"}</p>
                 <ul>
                     <li>-&gt; <Link href="https://github.com/huytd">Find me on GitHub</Link></li>
-                    <li>-&gt; <Link href="https://resume.huy.rocks">My resume (last update: 07/2021)</Link></li>
                     <li>-&gt; <Link href="mailto:hey@huy.rocks">Contact me</Link></li>
                 </ul>
 
