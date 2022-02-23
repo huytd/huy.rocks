@@ -9,6 +9,7 @@ import { DataService } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';
 import { base64_encode } from '../../utils/base64';
 import { SITE_URL } from '../../utils/consts';
+import fs from "fs";
 
 hljs.registerLanguage("zig", hljsZig);
 
@@ -31,6 +32,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   let markdown = "";
   let postTitle = "";
+
+  if (subpath === "__devmode") {
+    markdown = fs.readFileSync("TEST.md", "utf-8");
+    return {
+      props: { markdown, postTitle, repo, subpath }
+    }
+  }
 
   const days = await DataService.allPosts();
   if (subpath) {
