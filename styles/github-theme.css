@@ -963,6 +963,7 @@ h1 {
 mjx-container[jax="SVG"] {
   display: inline-block;
   vertical-align: middle;
+  overflow-x: auto;
 }
 
 mjx-container[jax="SVG"] > svg {
