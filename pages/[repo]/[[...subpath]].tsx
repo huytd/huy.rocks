@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
       markdown += "\n\n## Posts by categories\n"
       categories.forEach((posts, key) => {
-        markdown += `\n\n### ${key}\n\n${posts.slice(0, 5).map(post => `<span class="post-date">${post.date}</span> [${post.title}](/${repo}/${post.slug})`).join("\n")}`;
+        markdown += `\n\n### ${key}\n\n${posts.map(post => `<span class="post-date">${post.date}</span> [${post.title}](/${repo}/${post.slug})`).join("\n")}`;
       });
     } else {
       markdown = days.filter(day => day.project === repo).map(day => {
