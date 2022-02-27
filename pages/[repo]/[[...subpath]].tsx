@@ -200,7 +200,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
     .substr(0, 157) + "...";
 
   const socialImage = postTitle ? `https://huy.rocks/api/image?t=${base64_encode(postTitle)}` : 'https://huy.rocks/social-image.png';
-  const shouldIgnoreIndex = !subpath.length;
+  const isEntryContent = subpath.length;
 
   return (
     <>
@@ -212,7 +212,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
             <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
         </>
       )}
-        <div className="github-theme my-10" dangerouslySetInnerHTML={{ __html: content }}></div>
+        <div className={`github-theme my-10 ${isEntryContent ? 'post-content' : ''}`} dangerouslySetInnerHTML={{ __html: content }}></div>
       </main>
       <script dangerouslySetInnerHTML={{ __html: loadScript }}></script>
     </>

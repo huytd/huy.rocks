@@ -137,7 +137,7 @@ h1 {
 }
 
 .github-theme a.external-link i {
-    @apply text-slate-400 inline-block text-center rounded text-xs border w-4 h-4 ml-1;
+  @apply text-slate-500 inline-block text-center text-base;
 }
 
 .github-theme strong {
@@ -978,6 +978,10 @@ mjx-container[jax="SVG"] > svg {
   border-right: 2px solid transparent;
 }
 
+.github-theme .hljs-focus:empty {
+  display: none;
+}
+
 .github-theme .hljs-focus.focused {
   border-left: 2px solid #dad8d688;
   border-right: 2px solid #dad8d688;
@@ -991,4 +995,14 @@ mjx-container[jax="SVG"] > svg {
 
 a:target {
     border-bottom: 0.25em solid #bdffec;
+}
+
+.post-content > h1 ~ p, .post-content > h1 ~ ul:not(.post-content > h2:last-of-type ~ ul) {
+  a {
+    @apply underline decoration-slate-400 decoration-dotted decoration-2;
+
+    &:hover {
+      @apply underline decoration-slate-200 decoration-solid decoration-2;
+    }
+  }
 }
