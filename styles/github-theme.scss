@@ -136,9 +136,9 @@ h1 {
   text-decoration: underline;
 }
 
-.github-theme a.external-link i {
-  @apply text-slate-500 inline-block text-center text-base;
-}
+// .github-theme a.external-link i {
+//   @apply text-slate-600 inline-block text-center text-base ml-1;
+// }
 
 .github-theme strong {
   font-weight: 600;
@@ -999,10 +999,10 @@ a:target {
 
 .post-content > h1 ~ p, .post-content > h1 ~ ul:not(.post-content > h2:last-of-type ~ ul) {
   a {
-    @apply underline decoration-slate-400 decoration-dotted decoration-2;
+    @apply underline decoration-slate-400 decoration-dotted decoration-2 underline-offset-2;
 
     &:hover {
-      @apply underline decoration-slate-200 decoration-solid decoration-2;
+      @apply underline decoration-slate-200 decoration-solid decoration-2 underline-offset-2;
     }
   }
 }

@@ -169,7 +169,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
       },
       link(href: string, title: string, text: string) {
           if (href.startsWith("http") && href.indexOf(SITE_URL) === -1)  {
-              return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text}<i>↗</i></a>`;
+              return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text} ↗</a>`;
           }
           return false;
       }
