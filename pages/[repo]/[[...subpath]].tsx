@@ -82,7 +82,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         }
       });
 
-      markdown = `## Recently Added\n\n${posts.slice(0, 7).map(post => `<span class="post-date">${post.date}</span> [${post.fullTitle}](/${repo}/${post.slug})`).join("\n")}`;
+      markdown = `## Recently Added\n\n${posts.slice(0, 7).map(post => `<span class="block md:inline-block mt-3 md:mt-0 post-date">${post.date}</span> [${post.fullTitle}](/${repo}/${post.slug})`).join("\n")}`;
 
       const categories = posts.reduce((map: Map<string, PostEntry[]>, post) => {
         const key = post.category.toUpperCase();
@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
       markdown += "\n\n## Posts by categories\n"
       categories.forEach((posts, key) => {
-        markdown += `\n\n### ${key}\n\n${posts.map(post => `<span class="post-date">${post.date}</span> [${post.title}](/${repo}/${post.slug})`).join("\n")}`;
+        markdown += `\n\n### ${key}\n\n${posts.map(post => `<span class="block md:inline-block mt-3 md:mt-0 post-date">${post.date}</span> [${post.title}](/${repo}/${post.slug})`).join("\n")}`;
       });
     } else {
       markdown = days.filter(day => day.project === repo).map(day => {
