@@ -999,10 +999,10 @@ a:target {
 
 .post-content > h1 ~ p, .post-content > h1 ~ ul:not(.post-content > h2:last-of-type ~ ul) {
   a {
-    @apply underline decoration-slate-400 decoration-dotted decoration-2 underline-offset-2;
+    @apply underline decoration-slate-400 decoration-dotted decoration-2 underline-offset-4;
 
     &:hover {
-      @apply underline decoration-slate-200 decoration-solid decoration-2 underline-offset-2;
+      @apply underline decoration-slate-200 decoration-solid decoration-2 underline-offset-4;
     }
   }
 }
