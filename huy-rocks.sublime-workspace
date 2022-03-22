@@ -1,0 +1,622 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"unw",
+				"unwrap_or"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "pages/[repo]/[[...subpath]].tsx",
+			"settings":
+			{
+				"buffer_size": 7614,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "styles/github-theme.scss",
+			"settings":
+			{
+				"buffer_size": 16785,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					""
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Bench"
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/Rust/Rust.sublime-build",
+					""
+				],
+				[
+					"Packages/Rust/Rust.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Rust/Rust.sublime-build",
+					"Build & Run"
+				]
+			],
+			[
+				"Packages/Rust/Cargo.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					""
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Bench"
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/Rust/Rust.sublime-build",
+					""
+				],
+				[
+					"Packages/Rust/Rust.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Rust/Rust.sublime-build",
+					"Build & Run"
+				]
+			],
+			[
+				"Packages/Rust/Rust.sublime-build",
+				"Build & Run"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"loa",
+				"Package Control: Install Local Dependency"
+			],
+			[
+				"color sche",
+				"UI: Select Color Scheme"
+			],
+			[
+				"load",
+				"Package Control: Install Local Dependency"
+			],
+			[
+				"bro",
+				"Preferences: Browse Packages"
+			],
+			[
+				"custom",
+				"UI: Customize Color Scheme"
+			],
+			[
+				"color",
+				"UI: Select Color Scheme"
+			],
+			[
+				"local",
+				"Package Control: Install Local Dependency"
+			],
+			[
+				"install ",
+				"Package Control: Install Local Dependency"
+			],
+			[
+				"find file",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"lsp res",
+				"LSP: Restart Server"
+			],
+			[
+				"keyb",
+				"Preferences: Key Bindings"
+			],
+			[
+				"lsp go to d",
+				"LSP: Goto Declaration"
+			],
+			[
+				"v",
+				"View Package File"
+			],
+			[
+				"keybid",
+				"Preferences: Key Bindings"
+			],
+			[
+				"keybi",
+				"Preferences: LSP Key Bindings"
+			],
+			[
+				"keybind",
+				"Preferences: Key Bindings"
+			],
+			[
+				"package instal",
+				"Package Control: Install Package"
+			],
+			[
+				"custom co",
+				"UI: Customize Color Scheme"
+			],
+			[
+				"custom ",
+				"UI: Customize Color Scheme"
+			],
+			[
+				"color sch",
+				"UI: Select Color Scheme"
+			],
+			[
+				"package remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"color scheme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"package install",
+				"Package Control: Install Package"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"colorsc",
+				"UI: Select Color Scheme"
+			],
+			[
+				"goto symbol",
+				"LSP: Goto Symbol In Project"
+			],
+			[
+				"goto ",
+				"LSP: Goto Symbol"
+			],
+			[
+				"color ",
+				"UI: Select Color Scheme"
+			],
+			[
+				"package insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pakcage instal",
+				"Package Control: Install Package"
+			],
+			[
+				"pack insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package in",
+				"Package Control: Install Package"
+			],
+			[
+				"build",
+				"Build With: Cargo"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/htran@tripactions.com/code/play/devlog"
+	],
+	"file_history":
+	[
+		"/Users/htran@tripactions.com/Library/Application Support/Sublime Text/Packages/User/monolight.sublime-color-scheme",
+		"/Users/htran@tripactions.com/code/play/devlog/styles/globals.scss",
+		"/Users/htran@tripactions.com/code/play/devlog/styles/github-theme.scss",
+		"/Users/htran@tripactions.com/code/play/devlog/pages/[repo]/[[...subpath]].tsx",
+		"/Users/htran@tripactions.com/Downloads/monolight.sublime-color-scheme",
+		"/Users/htran@tripactions.com/code/play/ascii-d/Cargo.toml",
+		"/Users/htran@tripactions.com/Library/Application Support/Sublime Text/Packages/User/Default (OSX) copy.sublime-mousemap",
+		"/Users/htran@tripactions.com/code/play/ascii-d/src/data/grid_cell.rs",
+		"/Users/htran@tripactions.com/code/play/highlite/node_modules/next/types/index.d.ts",
+		"/Users/htran@tripactions.com/Library/Application Support/Sublime Text/Packages/Default.sublime-package",
+		"/Users/htran@tripactions.com/code/play/highlite/pages/index.tsx",
+		"/Users/htran@tripactions.com/code/play/highlite/styles/Home.module.css",
+		"/Users/htran@tripactions.com/code/play/highlite/styles/globals.css",
+		"/Users/htran@tripactions.com/code/play/highlite/pages/view.tsx",
+		"/Users/htran@tripactions.com/code/play/highlite/node_modules/terser/main.js",
+		"/Users/htran@tripactions.com/code/liquid-web/libs/ui/src/lib/directives/amount-input-currency-list-rates/amount-input-currency-list-rates.directive.ts",
+		"/Users/htran@tripactions.com/code/liquid-web/node_modules/@angular/common/http/http.d.ts"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 110.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"diff",
+			"gutter",
+			"HTML",
+			"comment",
+			"textcolor"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "pages/[repo]/[[...subpath]].tsx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7614,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5707,
+								5710
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.tsx"
+								},
+								{
+									"characters": ".\"'/@<",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "LSP-typescript"
+								}
+							],
+							"lsp_active": true,
+							"lsp_hover_provider_count": 1,
+							"lsp_uri": "file:///Users/htran%40tripactions.com/code/play/devlog/pages/%5Brepo%5D/%5B%5B...subpath%5D%5D.tsx",
+							"show_definitions": false,
+							"syntax": "Packages/TypeScript/TypeScriptReact.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": true,
+								"indentSize": 2,
+								"tabSize": 2
+							},
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3147.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "styles/github-theme.scss",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16785,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								93,
+								93
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///Users/htran%40tripactions.com/code/play/devlog/styles/github-theme.scss",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.diagnostics":
+	{
+		"height": 138.0
+	},
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 120.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.language servers":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "huy-rocks.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"gith",
+				"styles/github-theme.scss"
+			],
+			[
+				"glob",
+				"styles/globals.scss"
+			],
+			[
+				"sub",
+				"pages/[repo]/[[...subpath]].tsx"
+			],
+			[
+				"scss",
+				"styles/github-theme.scss"
+			],
+			[
+				"css",
+				"styles/globals.scss"
+			],
+			[
+				"scs",
+				"styles/globals.scss"
+			],
+			[
+				"main",
+				"src/main.rs"
+			],
+			[
+				"toml",
+				"Cargo.toml"
+			],
+			[
+				"gridlist",
+				"src/data/grid_list.rs"
+			],
+			[
+				"grid",
+				"src/widgets/grid.rs"
+			],
+			[
+				"view",
+				"pages/view.tsx"
+			],
+			[
+				"home",
+				"styles/Home.module.css"
+			],
+			[
+				"pageinde",
+				"pages/index.tsx"
+			],
+			[
+				"tal-input",
+				"libs/ui/src/lib/directives/amount-input-currency-list-rates/amount-input-currency-list-rates.directive.ts"
+			],
+			[
+				"underwriting company",
+				"apps/underwriting/src/app/company-screen/company-screen.component.html"
+			],
+			[
+				"underwritingappmodule",
+				"apps/underwriting/src/app/app.module.ts"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/code/play/ascii-d/ascii-d.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 241.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

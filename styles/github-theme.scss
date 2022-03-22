@@ -2,10 +2,6 @@
     --font-serif: "Iowan Old Style", "Sitka Text", Palatino, "Book Antiqua", serif;
 }
 
-h1 {
-  font-family: var(--font-serif);
-}
-
 .github-theme .octicon {
   display: inline-block;
   fill: currentColor;
@@ -622,11 +618,6 @@ h1 {
 }
 
 .github-theme h1,
-.github-theme h2 {
-  font-family: var(--font-serif);
-}
-
-.github-theme h1,
 .github-theme h2,
 .github-theme h3,
 .github-theme h4,
@@ -999,10 +990,23 @@ a:target {
 
 .post-content > h1 ~ p, .post-content > h1 ~ ul:not(.post-content > h2:last-of-type ~ ul) {
   a {
-    @apply underline decoration-slate-400 decoration-dotted decoration-2 underline-offset-4;
+    @apply underline decoration-slate-800 underline-offset-2;
 
     &:hover {
-      @apply underline decoration-slate-200 decoration-solid decoration-2 underline-offset-4;
+      @apply underline decoration-slate-600 text-slate-600 underline-offset-2;
     }
   }
+}
+
+.github-theme {
+  p, ul {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.65em;
+    text-align: justify;
+  }
+}
+
+.arrow {
+  font-family: "Inter" !important;
 }
