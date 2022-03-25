@@ -1,5 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
 :root {
     --font-serif: "Iowan Old Style", "Sitka Text", Palatino, "Book Antiqua", serif;
+}
+
+.github-theme {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #24292e;
+  word-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "onum" 1;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.72rem;
+  text-align: justify;
 }
 
 .github-theme .octicon {
@@ -59,13 +74,6 @@
   content: ' ';
   display: inline-block;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E");
-}
-
-.github-theme {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  color: #24292e;
-  word-wrap: break-word;
 }
 
 .github-theme details {
@@ -189,18 +197,12 @@
 }
 
 .github-theme h1,
-.github-theme h2 {
-  font-weight: 600;
-}
-
+.github-theme h2,
 .github-theme h3,
-.github-theme h4 {
-  font-weight: 600;
-}
-
+.github-theme h4,
 .github-theme h5,
 .github-theme h6 {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .github-theme p {
@@ -211,23 +213,10 @@
   margin: 0;
 }
 
-.github-theme ol,
 .github-theme ul {
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
-}
-
-.github-theme ol ol,
-.github-theme ul ol {
-  list-style-type: lower-roman;
-}
-
-.github-theme ol ol ol,
-.github-theme ol ul ol,
-.github-theme ul ol ol,
-.github-theme ul ul ol {
-  list-style-type: lower-alpha;
 }
 
 .github-theme dd {
@@ -591,7 +580,6 @@
 .github-theme ul {
   margin-top: 0;
   margin-bottom: 1.45em;
-  line-height: 1.5rem;
 }
 
 .github-theme hr {
@@ -623,43 +611,45 @@
 .github-theme h4,
 .github-theme h5,
 .github-theme h6 {
-  margin-top: 1.4em;
+  margin-top: 2.0em;
   margin-bottom: 1.4em;
   font-weight: 600;
   line-height: 1.25;
+  text-align: left;
 }
 
 .github-theme h1 {
-  font-size: 2.1em;
+  font-size: 2.15em;
 }
 
-.github-theme h1::after {
-    display: block;
-    content: " ";
-    border-bottom: 0.1rem solid #ccc;
-    width: 70px;
-    margin-top: 10px;
+// .github-theme h1::after {
+//     display: block;
+//     content: " ";
+//     border-bottom: 0.1rem solid #ccc;
+//     width: 70px;
+//     margin-top: 10px;
+// }
+
+body {
+    counter-reset: h2counter;
 }
 
 .github-theme h2 {
-  font-size: 1.5em;
+  font-size: 1.55em;
+  counter-increment: h2counter;
+  &::before {
+      content: counter(h2counter) ". ";
+      font-weight: 700;
+  }
 }
 
 .github-theme h3 {
-  font-size: 1.15em;
-}
-
-.github-theme h4 {
-  font-size: 1em;
-}
-
-.github-theme h5 {
-  font-size: 0.875em;
-}
-
-.github-theme h6 {
-  font-size: 0.85em;
-  color: #6a737d;
+  font-size: 1.25em;
+  // &::before {
+  //     content: "# ";
+  //     margin-left: -1em;
+  //     color: #ccc;
+  // }
 }
 
 .github-theme ol,
@@ -667,9 +657,6 @@
   padding-left: 2em;
 }
 
-.github-theme ol ol,
-.github-theme ol ul,
-.github-theme ul ol,
 .github-theme ul ul {
   margin-top: 0;
   margin-bottom: 0;
@@ -746,25 +733,17 @@
 }
 
 .github-theme code {
-  padding: 0.2em 0.4em;
-  margin: 0;
-  font-size: 0.87em;
-  background-color: #f6f8fa55;
-  border-radius: 3px;
+  font-size: 0.9rem;
 }
 
 .github-theme pre {
   word-wrap: normal;
 }
 
-.github-theme p > code {
-  color: #066;
-}
-
 .github-theme pre > code {
   padding: 0;
   margin: 0;
-  font-size: 100%;
+  font-size: 0.9rem;
   word-break: normal;
   white-space: pre;
   background: transparent;
@@ -990,23 +969,29 @@ a:target {
 
 .post-content > h1 ~ p, .post-content > h1 ~ ul:not(.post-content > h2:last-of-type ~ ul) {
   a {
-    @apply underline decoration-slate-800 underline-offset-2;
+    @apply underline decoration-dotted decoration-slate-500 underline-offset-2;
 
     &:hover {
-      @apply underline decoration-slate-600 text-slate-600 underline-offset-2;
+      @apply underline decoration-dotted decoration-slate-500 text-slate-600 underline-offset-2;
     }
   }
 }
 
 .github-theme {
-  p, ul {
-    font-family: var(--font-serif);
-    font-size: 1.15rem;
-    line-height: 1.8rem;
-    text-align: justify;
+  h1,h2,h3,h4,h5,h6 {
+    font-family: "Lora", var(--font-serif);
+  }
+
+  ol {
+      list-style: decimal;
   }
 }
 
 .arrow {
   font-family: "Inter" !important;
 }
+
+abbr {
+    font-variant: small-caps;
+}
+
