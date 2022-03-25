@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       const otherEnd = otherStart + 6;
       let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
       let linkToOthersMarkdown = linkToOthers.map(link => `- [${link?.title}](/${repo}/${link?.slug})`);
-      markdown += "\n\n" + `## Read more\n\n${linkToOthersMarkdown.join("\n")}`;
+      markdown += "\n\n" + `<h2 class="no-counter">Read more</h2>\n\n${linkToOthersMarkdown.join("\n")}`;
       postTitle = matchedDay?.title ?? "";
     } else {
       // Post not found
@@ -208,8 +208,8 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
       <main className="container-center my-10">
       {!subpath && (
         <>
-            <h1 className="font-bold text-4xl mt-10 border-none"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
-            <div className="my-2 text-gray-500">-&gt; <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
+            <h1 className="font-bold text-4xl mt-10 border-none font-serif"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
+            <div className="my-2 text-gray-500 font-serif"><span className="arrow">-&gt;</span> <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
         </>
       )}
         <div className={`github-theme my-10 ${isEntryContent ? 'post-content' : ''}`} dangerouslySetInnerHTML={{ __html: content }}></div>

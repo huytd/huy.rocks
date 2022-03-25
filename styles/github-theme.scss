@@ -622,14 +622,6 @@
   font-size: 2.15em;
 }
 
-// .github-theme h1::after {
-//     display: block;
-//     content: " ";
-//     border-bottom: 0.1rem solid #ccc;
-//     width: 70px;
-//     margin-top: 10px;
-// }
-
 body {
     counter-reset: h2counter;
 }
@@ -637,7 +629,7 @@ body {
 .github-theme h2 {
   font-size: 1.55em;
   counter-increment: h2counter;
-  &::before {
+  &:not(.no-counter)::before {
       content: counter(h2counter) ". ";
       font-weight: 700;
   }
