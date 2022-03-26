@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <script async defer data-domain="huy.rocks" src="https://analytics.huy.rocks/js/plausible.js"></script>
       <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     </Head>
-    <div className="flex justify-center items-center bg-gray-100 h-16">
+    <div className="flex justify-center items-center bg-gray-100 h-16 font-serif">
       <div className="container-center center-horizontal text-slate-500 font-bold">
         <Link href="/">
           <a className="font-bold text-gray-700">/home/huy</a>
@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </div>
     </div>
     <Component {...pageProps} />
-    <footer className="flex justify-center items-center h-16 bg-gray-100 text-gray-400 text-sm">
+    <footer className="flex font-serif justify-center items-center h-16 bg-gray-100 text-gray-400 text-sm">
       <div className="container-center center-horizontal flex">
         <p><Link href="https://ko-fi.com/thefullsnack">{"☕ buy me a coffee?"}</Link></p>
         <div className='flex-1'></div>

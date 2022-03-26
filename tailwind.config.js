@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Inter', ...defaultTheme.fontFamily.sans],
+        'sans': [...defaultTheme.fontFamily.sans],
         'mono': ['Monaco', 'Andale Mono', 'AndaleMono', ...defaultTheme.fontFamily.mono]
       },
       keyframes: {

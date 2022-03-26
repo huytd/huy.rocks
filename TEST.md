@@ -1,38 +1,20 @@
 # The standard Lorem Ipsum passage, used since the 1500s
 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laerunt mollit anim id est laborum."
 
-1. Hello, world!
-2. World this is a test
-3. Another item
-
-Another list
-
-1. Hello, world!
-2. World this is a test
-3. Another item
+Excepteur sint occaecat cupidatat non proident. Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam:
 
 - Hello, world!
 - World this is a test
 - Another item Hello, world
 
-
-Long lists:
-
-So we know there are 3 types of <abbr>inlay hints</abbr>:
+Velit esse cillum dolore eu fugiat nulla pariatur, excepteur sint occaecat cupidatat non proident,  dolorem eum fugiat quo voluptas nulla pariatur:
 
 1. <abbr>**parameter hint:**</abbr> Is the hint that appears in function calls parameters
-
-   ![](_meta/parameter-inlayhints.png)
-
 2. <abbr>**type hint:**</abbr> This is the hint that appears in variable or class/struct fields declarations
-
-   ![](_meta/type-inlayhints.png)
-
 3. <abbr>**enum member value hint:**</abbr> This is the hint for the values of enums
 
-   ![](_meta/enum-inlayhints.png)
-
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
 
 ## Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
 

@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     if (matchedIndex !== -1) {
       // Found the matched post
       const matchedDay = days[matchedIndex];
-      markdown = `[<span class="arrow">&lt;-</span> All posts](/${repo})\n\n# ${matchedDay!.title}\n\n${matchedDay!.tokens.join("")}`;
+      markdown = `<span class="arrow pull-back">&laquo;</span> [All posts](/${repo})\n\n# ${matchedDay!.title}\n\n${matchedDay!.tokens.join("")}`;
       const otherStart = Math.max(matchedIndex - 3, 0);
       const otherEnd = otherStart + 6;
       let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
@@ -169,7 +169,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
       },
       link(href: string, title: string, text: string) {
           if (href.startsWith("http") && href.indexOf(SITE_URL) === -1)  {
-              return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text} <span class="arrow">↗</span></a>`;
+              return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text}</a><sup class="arrow link">&urtri;</sup>`;
           }
           return false;
       }
@@ -209,7 +209,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
       {!subpath && (
         <>
             <h1 className="font-bold text-4xl mt-10 border-none font-serif"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
-            <div className="my-2 text-gray-500 font-serif"><span className="arrow">-&gt;</span> <Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
+            <div className="my-2 text-gray-500 font-serif"><Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
         </>
       )}
         <div className={`github-theme my-10 ${isEntryContent ? 'post-content' : ''}`} dangerouslySetInnerHTML={{ __html: content }}></div>

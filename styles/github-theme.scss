@@ -2,6 +2,7 @@
 
 :root {
     --font-serif: "Iowan Old Style", "Sitka Text", Palatino, "Book Antiqua", serif;
+    --punctuation-color: #999;
 }
 
 .github-theme {
@@ -207,10 +208,12 @@
 
 .github-theme p {
   margin-top: 0;
+  hanging-punctuation: first;
 }
 
 .github-theme blockquote {
   margin: 0;
+  hanging-punctuation: first;
 }
 
 .github-theme ul {
@@ -632,16 +635,13 @@ body {
   &:not(.no-counter)::before {
       content: counter(h2counter) ". ";
       font-weight: 700;
+      margin-left: -0.9em;
+      color: var(--punctuation-color);
   }
 }
 
 .github-theme h3 {
   font-size: 1.25em;
-  // &::before {
-  //     content: "# ";
-  //     margin-left: -1em;
-  //     color: #ccc;
-  // }
 }
 
 .github-theme ol,
@@ -916,9 +916,9 @@ body {
   vertical-align: middle;
 }
 
-.github-theme:not(.no-list) ul {
-  list-style: circle;
-}
+// .github-theme:not(.no-list) ul {
+//   list-style: circle;
+// }
 
 /* Mathjax */
 
@@ -984,9 +984,10 @@ a:target {
 
        li {
            counter-increment: olcounter;
-           padding-left: 2.0rem;
+           // padding-left: 2.0rem;
 
            &::before {
+               color: var(--punctuation-color);
                display: inline-block;
                content: counter(olcounter);
                border: 1px solid currentColor;
@@ -1001,10 +1002,43 @@ a:target {
            }
        }
    }
+
+   ul {
+       padding-left: 0;
+       list-style: none;
+
+       li {
+           // padding-left: 2.0rem;
+
+           &::before {
+               color: var(--punctuation-color);
+               display: inline-block;
+               content: "– ";
+               border: none;
+               width: 1.25em;
+               height: 1.25em;
+               text-align: center;
+               line-height: 0.85em;
+               border-radius: 50%;
+               font-size: 0.88em;
+               margin-right: 0.75rem;
+               margin-left: -2rem;
+           }
+       }
+   }
 }
 
 .arrow {
-  font-family: "Inter" !important;
+    color: var(--punctuation-color);
+
+    &.link {
+        margin-right: 0.25rem;
+    }
+
+    &.pull-back {
+        font-size: 1.5rem;
+        margin-left: -0.2rem;
+    }
 }
 
 abbr {
