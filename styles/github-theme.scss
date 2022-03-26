@@ -984,7 +984,7 @@ a:target {
 
        li {
            counter-increment: olcounter;
-           padding-left: 1.0rem;
+           padding-left: 2.0rem;
 
            &::before {
                display: inline-block;
@@ -997,6 +997,7 @@ a:target {
                border-radius: 50%;
                font-size: 0.88em;
                margin-right: 0.75rem;
+               margin-left: -2rem;
            }
        }
    }
