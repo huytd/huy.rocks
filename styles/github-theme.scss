@@ -141,10 +141,6 @@
   text-decoration: underline;
 }
 
-// .github-theme a.external-link i {
-//   @apply text-slate-600 inline-block text-center text-base ml-1;
-// }
-
 .github-theme strong {
   font-weight: 600;
 }
@@ -1045,3 +1041,37 @@ abbr {
     font-variant: small-caps;
 }
 
+@media(max-width: 600px) {
+  .github-theme {
+     ol {
+         padding-left: 0;
+
+         li {
+             padding-left: 2.0rem;
+         }
+     }
+
+     ul {
+         padding-left: 0;
+
+         li {
+             padding-left: 2.0rem;
+         }
+     }
+
+    h2 {
+      font-size: 1.45em;
+      &:not(.no-counter)::before {
+          margin-left: 0em;
+      }
+    }
+
+    h1 {
+      font-size: 1.85em;
+    }
+
+    h3 {
+      font-size: 1.15em;
+    }
+  }
+}

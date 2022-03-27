@@ -10,6 +10,7 @@ import { CommonSEO } from '../../components/SEO';
 import { base64_encode } from '../../utils/base64';
 import { SITE_URL } from '../../utils/consts';
 import fs from "fs";
+import { title } from 'process';
 
 hljs.registerLanguage("zig", hljsZig);
 
@@ -152,19 +153,18 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
       ) {
           var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
           if (level === 1) {
+              const titleText = text.replace("/", " / ");
               return '<h' + level + '><a class="font-bold" name="' +
                   escapedText +
                   '" href="/' + repo + '/' +
                   escapedText +
-                  '">' +
-                  text + '</a></h' + level + '>';
+                  '">' + titleText + '</a></h' + level + '>';
           } else {
               return '<h' + level + '><a class="font-bold" name="' +
                   escapedText +
                   '" href="#' +
                   escapedText +
-                  '">' +
-                  text + '</a></h' + level + '>';
+                  '">' + text + '</a></h' + level + '>';
           }
       },
       link(href: string, title: string, text: string) {

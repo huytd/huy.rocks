@@ -1,42 +1,9 @@
-// @font-face{
-//     font-feature-settings:"liga","tnum","case","calt","ss01","locl";
-//     font-display:swap;
-//     font-family:Inter;
-//     font-style:normal;
-//     font-weight:400;
-//     src:url(/fonts/Inter-Regular.woff2) format("woff2")
-// }
-// @font-face{
-//     font-feature-settings:"liga","tnum","case","calt","ss01","locl";
-//     font-display:swap;
-//     font-family:Inter;
-//     font-style:italic;
-//     font-weight:400;
-//     src:url(/fonts/Inter-Italic.woff2) format("woff2")
-// }
-// @font-face{
-//     font-feature-settings:"liga","tnum","case","calt","ss01","locl";
-//     font-display:swap;
-//     font-family:Inter;
-//     font-style:normal;
-//     font-weight:700;
-//     src:url(/fonts/Inter-Bold.woff2) format("woff2")
-// }
-// @font-face{
-//     font-feature-settings:"liga","tnum","case","calt","ss01","locl";
-//     font-display:swap;
-//     font-family:Inter;
-//     font-style:italic;
-//     font-weight:700;
-//     src:url(/fonts/Inter-BoldItalic.woff2) format("woff2")
-// }
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .container-center {
-    @apply pl-11 pr-3 md:px-0 w-screen md:w-[640px] mx-auto;
+    @apply px-5 md:px-0 w-screen md:w-[640px] mx-auto;
 }
 
 .center-horizontal {
