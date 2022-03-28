@@ -10,7 +10,7 @@ const Home: NextPage = () => {
             </Head>
             <main className="container-center github-theme no-list my-10 min-h-full flex-1">
                 <p></p>
-                <h1>Hello! I'm Huy!</h1>
+                <h1>{"Hello! I'm Huy!"}</h1>
                 <p>{"Look like you've found my space on the internet."}</p>
 
                 <p>{"I keep a development log for some of the project I'm working on, you can find them here:"}</p>
