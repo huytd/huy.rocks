@@ -9,7 +9,9 @@ const Home: NextPage = () => {
                 <meta name="google-site-verification" content="pSprDjtnAmX3XLxQpyoQ8lOTIpXXr9qqVsbl4A4KL4M" />
             </Head>
             <main className="container-center github-theme no-list my-10 min-h-full flex-1">
-                <p>{"Hello! I'm Huy! Look like you've found my space on the internet."}</p>
+                <p></p>
+                <h1>Hello! I'm Huy!</h1>
+                <p>{"Look like you've found my space on the internet."}</p>
 
                 <p>{"I keep a development log for some of the project I'm working on, you can find them here:"}</p>
                 <ol>
@@ -21,6 +23,7 @@ const Home: NextPage = () => {
                 <p>{"Most of my other projects doesn't have a DEVLOG, but please feel free to check them on GitHub."}</p>
 
                 <p>{"In case you're interested, you can reach me "}<b><Link href="mailto:hey@huy.rocks">via email</Link></b> or <b><Link href="https://github.com/huytd">visit my GitHub</Link></b></p>
+                <div className="mb-20">&nbsp;</div>
             </main>
         </>
     )
