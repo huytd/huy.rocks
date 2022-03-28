@@ -194,7 +194,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
   const pageTitle = postTitle ? `${postTitle}` : ("huy.rocks/" + repo);
   const description = markdown
     .split('\n')
-    .filter((line: string) => !line.startsWith("# ") && !line.startsWith("\n") && line.length >= 5)
+    .filter((line: string) => !line.startsWith("# ") && !line.startsWith("\n") && line.length >= 5 && (line.indexOf("arrow pull-back") === -1))
     .slice(0, 3)
     .join(" ")
     .substr(0, 157) + "...";
