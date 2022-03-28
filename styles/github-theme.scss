@@ -2,13 +2,13 @@
 
 :root {
     --font-serif: "Iowan Old Style", "Sitka Text", Palatino, "Book Antiqua", serif;
-    --punctuation-color: #999;
+    --punctuation-color: rgb(168 162 158);
 }
 
 .github-theme {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  color: #24292e;
+  @apply text-stone-900;
   word-wrap: break-word;
   text-rendering: optimizeLegibility;
   font-feature-settings: "onum" 1;
@@ -586,7 +586,7 @@
   padding: 0;
   margin: 2.4rem auto;
   width: 50px;
-  background-color: #e1e4e8;
+  @apply bg-stone-200;
   border: 0;
 }
 
@@ -1074,4 +1074,8 @@ abbr {
       font-size: 1.15em;
     }
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply text-stone-700;
 }
