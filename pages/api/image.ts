@@ -28,9 +28,6 @@ function wrapText(context: SKRSContext2D, text: string, x: number, y: number, ma
   context.fillText(line, x, y);
 }
 
-GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'Inter-Regular.ttf'));
-GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'Inter-Bold.ttf'));
-
 function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -57,25 +54,31 @@ function handler(
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
 
-    ctx.fillStyle = '#F7F8FB';
+    ctx.fillStyle = '#f2ebe4';
     ctx.fillRect(0, 0, IMG_WIDTH, IMG_HEIGHT);
 
-    ctx.font = "bold 35px Inter";
-    ctx.fillStyle = '#253A59';
-    ctx.fillText("->", 70, 95);
-    ctx.fillText("/huy/rocks", 216, 95);
+    const gradient = ctx.createLinearGradient(0, 0, IMG_WIDTH, 170);
+    gradient.addColorStop(0, '#f9f5f2');
+    gradient.addColorStop(0.75, '#f2ebe4');
+    gradient.addColorStop(1, '#f2ebe4');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, IMG_WIDTH, 170);
 
-    ctx.font = "35px Inter";
-    ctx.fillStyle = '#AAB7CA';
-    ctx.fillText("/home", 111, 95);
+    ctx.font = "bold 40px 'Iowan Old Style', 'Sitka Text', Palatino, 'Book Antiqua', serif";
+    ctx.fillStyle = '#9a8c98';
+    ctx.fillText("huy.rocks", 70, 100);
 
-    ctx.font = "bold 48px Inter";
-    ctx.fillStyle = '#AAB7CA';
-    ctx.fillText(date, 70, 290);
+    ctx.font = "bold 40px 'Iowan Old Style', 'Sitka Text', Palatino, 'Book Antiqua', serif";
+    ctx.fillStyle = '#483F47';
+    ctx.fillText("/everyday", 246, 100);
 
-    ctx.font = "bold 72px Inter";
-    ctx.fillStyle = '#253A59';
-    wrapText(ctx, title, 70, 370, IMG_WIDTH - 80, 82);
+    ctx.font = "bold 48px 'Iowan Old Style', 'Sitka Text', Palatino, 'Book Antiqua', serif";
+    ctx.fillStyle = '#9a8c98';
+    ctx.fillText(date, 70, 260);
+
+    ctx.font = "bold 74px 'Iowan Old Style', 'Sitka Text', Palatino, 'Book Antiqua', serif";
+    ctx.fillStyle = '#40383F';
+    wrapText(ctx, title, 70, 355, IMG_WIDTH - 80, 105);
 
     imageData = canvas.toBuffer('image/png');
     lruCache.set(input, imageData);
