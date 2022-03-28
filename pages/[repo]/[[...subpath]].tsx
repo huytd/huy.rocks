@@ -191,7 +191,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
     };
   `;
 
-  const pageTitle = "huy.rocks/" + repo + (postTitle ? ` | ${postTitle}` : "");
+  const pageTitle = postTitle ? `${postTitle}` : ("huy.rocks/" + repo);
   const description = markdown
     .split('\n')
     .filter((line: string) => !line.startsWith("# ") && !line.startsWith("\n") && line.length >= 5)
