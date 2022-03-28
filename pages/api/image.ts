@@ -8,10 +8,8 @@ import LRUCache from 'lru-cache';
 const IMG_WIDTH = 1200;
 const IMG_HEIGHT = 600;
 
-GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'PlayfairDisplay-Italic.ttf'));
 GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'PlayfairDisplay-Regular.ttf'));
 GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'PlayfairDisplay-SemiBold.ttf'));
-GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'PlayfairDisplay-SemiBoldItalic.ttf'));
 
 function wrapText(context: SKRSContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
   var words = text.split(' ');
