@@ -947,7 +947,7 @@ mjx-container[jax="SVG"] > svg {
 }
 
 .github-theme .post-date {
-  @apply mr-5 text-gray-400;
+  @apply mr-5 text-stone-400;
   font-variant-numeric: tabular-nums slashed-zero;
 }
 
@@ -957,10 +957,10 @@ a:target {
 
 .post-content > h1 ~ p, .post-content > h1 ~ ul:not(.post-content > h2:last-of-type ~ ul) {
   a {
-    @apply underline decoration-dotted decoration-slate-500 underline-offset-2;
+    @apply underline decoration-dotted decoration-stone-500 underline-offset-2;
 
     &:hover {
-      @apply underline decoration-dotted decoration-slate-500 text-slate-600 underline-offset-2;
+      @apply underline decoration-dotted decoration-stone-500 text-stone-600 underline-offset-2;
     }
   }
 }
