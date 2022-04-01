@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { SITE_NAME, SITE_URL } from "../utils/consts";
+import { SITE_NAME, SITE_URL, TWITTER_USER } from "../utils/consts";
 
 export type CommonSEOProps = {
     title: string,
@@ -24,7 +24,8 @@ export const CommonSEO = ({ title, description, ogType, ogImage, noIndex }: Comm
             <meta property="og:title" content={title} />
             <meta property="og:image" content={ogImage} key={ogImage} />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:site" content={SITE_URL} />
+            <meta name="twitter:site" content={TWITTER_USER} />
+            <meta name="twitter:creator" content={TWITTER_USER} />
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={ogImage} />
