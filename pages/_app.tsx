@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Component {...pageProps} />
     <footer className="flex font-serif justify-center items-center h-16 bg-stone-100 text-stone-400 text-sm">
       <div className="container-center center-horizontal flex">
-        <p><Link href="https://ko-fi.com/thefullsnack">{"☕ buy me a coffee?"}</Link></p>
+        <p><Link href="https://twitter.com/huytd189">{"🐦 @huytd189"}</Link></p>
         <div className='flex-1'></div>
         <div className='font-normal'>
            <Link href="/rss.xml">{"📮 RSS"}</Link>
