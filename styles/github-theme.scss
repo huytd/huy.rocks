@@ -921,7 +921,11 @@ body {
 mjx-container[jax="SVG"] {
   display: inline-block;
   vertical-align: middle;
-  overflow-x: auto;
+  overflow: hidden;
+}
+
+mjx-container[display] {
+    overflow-x: auto;
 }
 
 mjx-container[jax="SVG"] > svg {
