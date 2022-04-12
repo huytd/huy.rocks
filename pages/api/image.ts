@@ -83,7 +83,7 @@ function handler(
 
     ctx.font = "bold 80px" + " " + fontString;
     ctx.fillStyle = '#40383F';
-    wrapText(ctx, title, 70, 355, IMG_WIDTH - 80, 92);
+    wrapText(ctx, title, 70, 355, IMG_WIDTH - 100, 92);
 
     imageData = canvas.toBuffer('image/png');
 
