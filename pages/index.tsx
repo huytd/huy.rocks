@@ -17,6 +17,7 @@ const Home: NextPage = () => {
                 <ol>
                     <li><Link href="/everyday"><a className="font-bold">Everyday Learning</a></Link>: <i>Writing about what I learned everyday</i></li>
                     <li><Link href="/gust-lang"><a className="font-bold">Gust-lang</a></Link>: <i>My journey to build a toy programming language</i></li>
+                    <li><Link href="/toylisp"><a className="font-bold">ToyLISP</a></Link>: <i>A toy LISP-alike language, focusing on building a bytecode interpreter.</i></li>
                     <li><Link href="/ascii-d"><a className="font-bold">ASCII-d</a></Link>: <i>Cross-platform ASCII diagram drawing application</i></li>
                     <li><Link href="/snarkyterm"><a className="font-bold">SnarkyTerm</a></Link>: <i>A terminal emulator written in Rust and WGPU</i></li>
                     <li><Link href="/web-debugger"><a className="font-bold">Web Debugger</a></Link>: <i>A Web-based JavaScript debugger</i></li>
