@@ -47,13 +47,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
         if (matchedIndex !== -1) {
             // Found the matched post
             const matchedDay = days[matchedIndex];
-            markdown = `<span class="arrow pull-back">&laquo;</span> [All posts](/${repo})\n\n# ${matchedDay!.title}\n\n${matchedDay!.tokens.join("")}`;
+            postTitle = matchedDay?.title ?? "";
+            const [postedDate, displayTitle] = postTitle.split(" - ");
+            markdown = `<span class="arrow pull-back">&laquo;</span> [All posts](/${repo})\n\n# ${displayTitle}\n<div class="desc text-stone-400">Posted On ${postedDate}</div>\n\n${matchedDay!.tokens.join("")}`;
             const otherStart = Math.max(matchedIndex - 3, 0);
             const otherEnd = otherStart + 6;
             let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
             let linkToOthersMarkdown = linkToOthers.map(link => `- [${link?.title}](/${repo}/${link?.slug})`);
-            markdown += "\n\n" + `<h2 class="no-counter">Read more</h2>\n\n${linkToOthersMarkdown.join("\n")}`;
-            postTitle = matchedDay?.title ?? "";
+            markdown += "\n\n" + `<h2 class="no-counter post-footer">Read more</h2>\n\n${linkToOthersMarkdown.join("\n")}`;
         } else {
             // Post not found
             markdown = `Hey! Look like you have lost your way, consider [going back](/${repo})?`;

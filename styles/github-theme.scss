@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-    --font-serif: "Iowan Old Style", "Sitka Text", Palatino, "Book Antiqua", serif;
+    --font-serif: "Spectral", "Iowan Old Style", "Sitka Text", Palatino, "Book Antiqua", serif;
     --punctuation-color: rgb(168 162 158);
 }
 
@@ -619,6 +619,11 @@
 
 .github-theme h1 {
   font-size: 2.15em;
+  margin-bottom: 0.25em;
+}
+
+.github-theme h1 + .desc {
+	margin-bottom: 1.45em;
 }
 
 body {
@@ -631,13 +636,18 @@ body {
   &:not(.no-counter)::before {
       content: counter(h2counter) ". ";
       font-weight: 700;
-      margin-left: -0.9em;
+      // margin-left: -0.9em;
       color: var(--punctuation-color);
   }
 }
 
 .github-theme h3 {
-  font-size: 1.25em;
+  font-size: 1.15em;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+  &::before {
+  	  content: "# ";
+      color: var(--punctuation-color);
+  }
 }
 
 .github-theme ol,
@@ -753,7 +763,7 @@ body {
   overflow: auto;
   font-size: 0.87em;
   line-height: 1.6;
-  background-color: #faf8f544;
+  background-color: #dfe2e550;
   border: 1px solid #dfe2e555;
   border-radius: 3px;
 }
@@ -932,12 +942,28 @@ mjx-container[jax="SVG"] > svg {
   margin: 0 auto;
 }
 
+.github-theme pre code {
+	counter-reset:line-code;
+}
+
 .github-theme .hljs-focus {
   display: inline-block;
   width: 100%;
   padding: 0 16px;
   border-left: 2px solid transparent;
   border-right: 2px solid transparent;
+  counter-increment: line-code;
+
+  &:before {
+  	  display: inline-block;
+  	  width: 20px;
+  	  content: counter(line-code);
+  	  text-align: right;
+  	  font-size: 0.85em;
+  	  margin-right: 20px;
+  	  margin-left: -10px;
+  	  opacity: 0.3;
+  }
 }
 
 .github-theme .hljs-focus:empty {
@@ -971,7 +997,7 @@ a:target {
 
 .github-theme {
   h1,h2,h3,h4,h5,h6 {
-    font-family: "Lora", var(--font-serif);
+    font-family: var(--font-serif); // Custom font if needed
   }
 
    ol {
@@ -994,11 +1020,11 @@ a:target {
                width: 1.25em;
                height: 1.25em;
                text-align: center;
-               line-height: 0.85em;
+               line-height: 1.25em;
                border-radius: 50%;
                font-size: 0.88em;
                margin-right: 0.75rem;
-               margin-left: -2rem;
+               // margin-left: -2rem;
            }
        }
    }
@@ -1013,15 +1039,15 @@ a:target {
            &::before {
                color: var(--punctuation-color);
                display: inline-block;
-               content: "– ";
+               content: "⁃";
                border: none;
                width: 1.25em;
                height: 1.25em;
                text-align: center;
                border-radius: 50%;
                font-size: 0.88em;
-               margin-right: 0.75rem;
-               margin-left: -2rem;
+               margin-right: 0.25rem;
+               // margin-left: -2rem;
                float: left;
            }
        }
@@ -1082,4 +1108,10 @@ abbr {
 
 h1, h2, h3, h4, h5, h6 {
   @apply text-stone-700;
+}
+
+.github-theme .post-footer {
+	border-top: 1px solid rgb(231 229 228);
+	padding-top: 40px;
+	font-size: 1.15rem;
 }

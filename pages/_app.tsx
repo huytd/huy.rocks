@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link rel="icon" href="/favicon.ico" />
             <script async defer data-domain="huy.rocks" src="https://analytics.huy.rocks/js/plausible.js"></script>
             <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-            <a rel="me" href="https://masto.ai/@huy">Mastodon</a>
         </Head>
         <div className="flex justify-center items-center bg-stone-100 h-16 font-serif">
             <div className="container-center center-horizontal text-stone-500 font-bold">
@@ -27,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         <footer className="flex font-serif justify-center items-center h-16 bg-stone-100 text-stone-400 text-sm">
             <div className="container-center center-horizontal flex">
-                <p><Link href="https://twitter.com/huytd189">{"🐦 @huytd189"}</Link></p>
+                <p><a rel="me" href="https://masto.ai/@huy">🐘 @huy</a></p>
                 <div className='flex-1'></div>
                 <div className='font-normal'>
                     <Link href="/rss.xml">{"📮 RSS"}</Link>
