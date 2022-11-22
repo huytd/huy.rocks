@@ -13,6 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link rel="icon" href="/favicon.ico" />
             <script async defer data-domain="huy.rocks" src="https://analytics.huy.rocks/js/plausible.js"></script>
             <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={""}/>
+			<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
         </Head>
         <div className="flex justify-center items-center bg-stone-100 h-16 font-serif">
             <div className="container-center center-horizontal text-stone-500 font-bold">
