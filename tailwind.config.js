@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': [...defaultTheme.fontFamily.sans],
-        'mono': ['Monaco', 'Andale Mono', 'AndaleMono', ...defaultTheme.fontFamily.mono]
+        'mono': ['Overpass Mono', 'Monaco', 'Andale Mono', 'AndaleMono', ...defaultTheme.fontFamily.mono]
       },
       keyframes: {
         blink: {
