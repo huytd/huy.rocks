@@ -6,8 +6,7 @@ import { resolve } from 'path';
 const IMG_WIDTH = 1200;
 const IMG_HEIGHT = 600;
 
-GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'PlayfairDisplay-Regular.ttf'));
-GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'PlayfairDisplay-SemiBold.ttf'));
+GlobalFonts.registerFromPath(resolve('./public', 'fonts', 'RozhaOne-Regular.ttf'));
 
 function wrapText(context: SKRSContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
     var words = text.split(' ');
@@ -55,35 +54,30 @@ function handler(
     ctx.fillRect(0, 0, IMG_WIDTH, IMG_HEIGHT);
 
     const gradient = ctx.createLinearGradient(0, 0, IMG_WIDTH, 170);
-    gradient.addColorStop(0, '#f9f5f2');
-    gradient.addColorStop(0.35, '#f9f5f2');
-    gradient.addColorStop(1, '#f2ebe4');
+    gradient.addColorStop(0, 'rgb(203 213 225)');
+    gradient.addColorStop(1, 'rgb(241 245 249)');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, IMG_WIDTH, 170);
 
     const revgradient = ctx.createLinearGradient(0, 170, IMG_WIDTH, IMG_HEIGHT);
-    revgradient.addColorStop(0, '#f2ebe4');
-    revgradient.addColorStop(1, '#f9f5f2');
+    revgradient.addColorStop(0, 'rgb(203 213 225)');
+    revgradient.addColorStop(1, 'rgb(212 212 216)');
     ctx.fillStyle = revgradient;
     ctx.fillRect(0, 170, IMG_WIDTH, IMG_HEIGHT);
 
-    const fontString = "'Playfair Display', serif";
+    const fontString = "'Rozha One', serif";
 
     ctx.font = "bold 40px" + " " + fontString;
-    ctx.fillStyle = '#9a8c98';
+    ctx.fillStyle = 'rgb(100 116 139)';
     ctx.fillText("huy.rocks", 70, 100);
 
     ctx.font = "bold 40px" + " " + fontString;
-    ctx.fillStyle = '#483F47';
-    ctx.fillText("/everyday", 252, 100);
-
-    ctx.font = "bold 44px" + " " + fontString;
-    ctx.fillStyle = '#9a8c98';
-    ctx.fillText(date, 70, 260);
+    ctx.fillStyle = 'rgb(51 65 85)';
+    ctx.fillText("/everyday", 260, 100);
 
     ctx.font = "bold 80px" + " " + fontString;
-    ctx.fillStyle = '#40383F';
-    wrapText(ctx, title, 70, 355, IMG_WIDTH - 100, 92);
+    ctx.fillStyle = 'rgb(51 65 85)';
+    wrapText(ctx, title, 70, 305, IMG_WIDTH - 100, 92);
 
     imageData = canvas.toBuffer('image/png');
 
