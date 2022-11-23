@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap');
-
 :root {
+	--font-title: "Rozha One";
     --font-serif: "Spectral", "Iowan Old Style", "Sitka Text", Palatino, "Book Antiqua", serif;
     --punctuation-color: rgb(168 162 158);
 }
@@ -643,8 +641,7 @@ body {
 }
 
 .github-theme h3 {
-  font-size: 1.15em;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+  font-size: 1.2em;
   &::before {
   	  content: "# ";
       color: var(--punctuation-color);
@@ -1001,6 +998,10 @@ a:target {
     font-family: var(--font-serif); // Custom font if needed
   }
 
+  h1 {
+  	  font-family: var(--font-title);
+  }
+
    ol {
        counter-reset: olcounter;
        padding-left: 0;
@@ -1064,7 +1065,7 @@ a:target {
 
     &.pull-back {
         font-size: 1.5rem;
-        margin-left: -0.2rem;
+        // margin-left: -0.2rem;
     }
 }
 
@@ -1074,22 +1075,6 @@ abbr {
 
 @media(max-width: 600px) {
   .github-theme {
-     ol {
-         padding-left: 0;
-
-         li {
-             padding-left: 2.0rem;
-         }
-     }
-
-     ul {
-         padding-left: 0;
-
-         li {
-             padding-left: 2.0rem;
-         }
-     }
-
     h2 {
       font-size: 1.45em;
       &:not(.no-counter)::before {
@@ -1112,7 +1097,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .github-theme .post-footer {
-	border-top: 1px solid rgb(231 229 228);
-	padding-top: 40px;
 	font-size: 1.15rem;
 }
