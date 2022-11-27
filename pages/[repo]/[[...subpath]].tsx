@@ -49,12 +49,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
             const matchedDay = days[matchedIndex];
             postTitle = matchedDay?.title ?? "";
             const [postedDate, displayTitle] = postTitle.split(" - ");
-            markdown = `<span class="arrow pull-back">&laquo;</span> [All posts](/${repo})\n\n# ${displayTitle}\n<div class="desc text-stone-400">Posted On ${postedDate}</div>\n\n${matchedDay!.tokens.join("")}`;
+            markdown = `<span class="arrow pull-back font-mono text-stone-400 text-sm">←</span> <a class="font-mono text-stone-400 text-sm" href="/${repo}">All posts</a>\n\n# ${displayTitle}\n<div class="desc text-stone-400 font-mono text-sm">Posted On ${postedDate}</div>\n\n${matchedDay!.tokens.join("")}`;
             const otherStart = Math.max(matchedIndex - 3, 0);
             const otherEnd = otherStart + 6;
             let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
             let linkToOthersMarkdown = linkToOthers.map(link => `- [${link?.title}](/${repo}/${link?.slug})`);
-            markdown += "\n\n" + `<hr/><h2 class="no-counter post-footer">Read more</h2>\n\n${linkToOthersMarkdown.join("\n")}`;
+            markdown += "\n\n" + `<hr/><div class="related-links"><div class="no-counter font-bold font-mono text-sm mb-3">Read more</div>\n\n${linkToOthersMarkdown.join("\n")}</div>`;
         } else {
             // Post not found
             markdown = `Hey! Look like you have lost your way, consider [going back](/${repo})?`;
@@ -208,8 +208,8 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
             <main className="container-center my-10">
                 {!subpath && (
                     <>
-                        <h1 className="font-bold text-4xl mt-10 border-none font-serif"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
-                        <div className="my-2 text-stone-500 font-serif"><Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
+                        <h1 className="font-bold text-4xl mt-10 border-none font-title"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
+                        <div className="my-2 text-stone-400 font-mono text-sm"><Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
                     </>
                 )}
                 <div className={`github-theme my-10 ${isEntryContent ? 'post-content' : ''}`} dangerouslySetInnerHTML={{ __html: content }}></div>

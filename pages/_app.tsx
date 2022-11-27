@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&family=Rozha+One&family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
         </Head>
         <div className="flex justify-center items-center bg-stone-100 h-16 font-serif">
-            <div className="container-center center-horizontal text-stone-500 font-bold">
+            <div className="container-center center-horizontal text-stone-500 font-bold font-mono text-sm">
                 <Link href="/">
                     <a className="font-bold text-stone-700">huy.rocks</a>
                 </Link>
@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </div>
         </div>
         <Component {...pageProps} />
-        <footer className="flex font-serif justify-center items-center h-16 bg-stone-100 text-stone-400 text-sm">
+        <footer className="flex font-mono justify-center items-center h-16 bg-stone-100 text-stone-400 text-sm">
             <div className="container-center center-horizontal flex">
                 <p><a rel="me" href="https://masto.ai/@huy">🐘 @huy</a></p>
                 <div className='flex-1'></div>
