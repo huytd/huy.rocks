@@ -16,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={""}/>
 			<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&family=Rozha+One&family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
+			<link rel="stylesheet" href="https://use.typekit.net/nme2fxj.css"/>
         </Head>
         <div className="flex justify-center items-center bg-stone-100 h-16 font-serif">
             <div className="container-center center-horizontal text-stone-500 font-bold font-mono text-sm">
@@ -27,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </div>
         </div>
         <Component {...pageProps} />
-        <footer className="flex font-mono justify-center items-center h-16 bg-stone-100 text-stone-400 text-sm">
+        <footer className="flex font-mono justify-center items-center h-16 bg-stone-100 text-stone-500 text-sm">
             <div className="container-center center-horizontal flex">
                 <p><a rel="me" href="https://masto.ai/@huy">🐘 @huy</a></p>
                 <div className='flex-1'></div>

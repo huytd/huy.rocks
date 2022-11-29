@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
             const matchedDay = days[matchedIndex];
             postTitle = matchedDay?.title ?? "";
             const [postedDate, displayTitle] = postTitle.split(" - ");
-            markdown = `<span class="arrow pull-back font-mono text-stone-400 text-sm">←</span> <a class="font-mono text-stone-400 text-sm" href="/${repo}">All posts</a>\n\n# ${displayTitle}\n<div class="desc text-stone-400 font-mono text-sm">Posted On ${postedDate}</div>\n\n${matchedDay!.tokens.join("")}`;
+            markdown = `<span class="arrow pull-back font-mono text-stone-500 text-sm">←</span> <a class="font-mono text-stone-500 text-sm" href="/${repo}">All posts</a>\n\n# ${displayTitle}\n<div class="desc text-stone-500 font-mono text-sm">Posted On ${postedDate}</div>\n\n${matchedDay!.tokens.join("")}`;
             const otherStart = Math.max(matchedIndex - 3, 0);
             const otherEnd = otherStart + 6;
             let linkToOthers = days.slice(otherStart, otherEnd).filter(day => day?.slug !== matchedDay?.slug);
@@ -209,7 +209,7 @@ const Devlog: NextPage = ({ markdown, postTitle, repo, subpath }: InferGetStatic
                 {!subpath && (
                     <>
                         <h1 className="font-bold text-4xl mt-10 border-none font-title"><Link href={`/${repo}`}>{repo}</Link>: Development Log</h1>
-                        <div className="my-2 text-stone-400 font-mono text-sm"><Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
+                        <div className="my-2 text-stone-500 font-mono text-sm"><Link href={`https://github.com/huytd/${repo}`}><a className="hover:underline">GitHub Repository</a></Link></div>
                     </>
                 )}
                 <div className={`github-theme my-10 ${isEntryContent ? 'post-content' : ''}`} dangerouslySetInnerHTML={{ __html: content }}></div>
