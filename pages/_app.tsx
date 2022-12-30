@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
             <title>huy.rocks/{page ? "/" + page : ""}</title>
             <link rel="icon" href="/favicon.ico" />
-            <script async defer data-domain="huy.rocks" src="https://analytics.huy.rocks/js/plausible.js"></script>
+            <script async src="https://huy-rocks-ackee-analytics-prod.up.railway.app/tracker.js" data-ackee-server="https://huy-rocks-ackee-analytics-prod.up.railway.app" data-ackee-domain-id="ebd2a693-bfc3-4853-85f0-49d6e1db6fa4"></script>
             <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={""}/>
