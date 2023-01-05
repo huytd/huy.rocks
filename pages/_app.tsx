@@ -2,19 +2,21 @@ import '../styles/globals.scss'
 import '../styles/github-theme.scss'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import Head from 'next/head';
+import posthog from 'posthog-js';
 
 function MyApp({ Component, pageProps }: AppProps) {
     const page = pageProps?.repo ?? "";
+
+    useEffect(() => {
+		posthog.init('phc_Rt3AgBZEPEd7wSsUSgXK1MQWS4rqVeFgW3x3T9uNZhu', { api_host: 'https://app.posthog.com' })
+    }, []);
+
     return <Fragment>
         <Head>
             <title>huy.rocks/{page ? "/" + page : ""}</title>
             <link rel="icon" href="/favicon.ico" />
-			<script>
-    			!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    			posthog.init('phc_Rt3AgBZEPEd7wSsUSgXK1MQWS4rqVeFgW3x3T9uNZhu',{api_host:'https://app.posthog.com'})
-			</script>
             <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={""}/>
