@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&family=Rozha+One&family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
 			<link rel="stylesheet" href="https://use.typekit.net/nme2fxj.css"/>
 			<script {...analyticsProps}></script>
+			<script data-goatcounter="https://analytics.huy.rocks/count" async src="//analytics.huy.rocks/count.js"></script>
         </Head>
         <div className="flex justify-center items-center bg-stone-100 h-16 font-serif">
             <div className="container-center center-horizontal text-stone-500 font-bold font-mono text-sm">
