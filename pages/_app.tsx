@@ -2,17 +2,11 @@ import '../styles/globals.scss'
 import '../styles/github-theme.scss'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
     const page = pageProps?.repo ?? "";
-
-    const analyticsProps = {
-		"src": "https://cdn.counter.dev/script.js",
-		"data-id": "1f306b24-fb3c-4bcc-8057-c8bdf6414783",
-		"data-utcoffset": "-8"
-    };
 
     return <Fragment>
         <Head>
@@ -23,7 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={""}/>
 			<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&family=Rozha+One&family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
 			<link rel="stylesheet" href="https://use.typekit.net/nme2fxj.css"/>
-			<script {...analyticsProps}></script>
 			<script defer data-domain="huy.rocks" src="https://analytics.huy.rocks/js/script.js"></script>
         </Head>
         <div className="flex justify-center items-center bg-stone-100 h-16 font-serif">
