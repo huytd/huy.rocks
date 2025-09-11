@@ -15,16 +15,20 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
             language: "en",
         });
 
-        const posts = await DataService.allPosts();
+        const posts = DataService.getAllPosts();
 
         for (let post of posts) {
-            const postUrl = `${SITE_URL}/${post.project}/${post.slug}`;
-            const postDate = dayjs(post.title.split('-')[0].trim());
+            const postUrl = `${SITE_URL}/everyday/${post.slug}`;
+            const postDate = dayjs(post.date.replace(/\./g, '/'));
             if (postDate.isValid()) {
                 feed.addItem({
                     title: post.title,
                     link: postUrl,
-                    date: postDate.toDate()
+                    description: post.excerpt,
+                    date: postDate.toDate(),
+                    category: [{
+                        name: post.category
+                    }]
                 });
             }
         }

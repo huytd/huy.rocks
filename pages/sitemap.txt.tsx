@@ -6,10 +6,22 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     if (res) {
         let sitemap = [];
 
-        const posts = await DataService.allPosts();
+        // Add homepage
+        sitemap.push(SITE_URL);
+        
+        // Add everyday index page
+        sitemap.push(`${SITE_URL}/everyday`);
 
-        for (let {project, slug} of posts) {
-            sitemap.push(`${SITE_URL}/${project}/${slug}`);
+        // Add all blog posts
+        const posts = DataService.getAllPosts();
+        for (let post of posts) {
+            sitemap.push(`${SITE_URL}/everyday/${post.slug}`);
+        }
+
+        // Add category pages
+        const categories = DataService.getCategories();
+        for (let category of categories) {
+            sitemap.push(`${SITE_URL}/category/${category.toLowerCase()}`);
         }
 
         res.setHeader('Content-type', 'text/plain');
