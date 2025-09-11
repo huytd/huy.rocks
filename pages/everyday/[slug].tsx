@@ -43,9 +43,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
     useEffect(() => {
-        // Process math after component mounts
-        if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise();
+        // Process math after component mounts (client-side only)
+        if (typeof window !== 'undefined' && (window as any).MathJax && (window as any).MathJax.typesetPromise) {
+            (window as any).MathJax.typesetPromise();
         }
     }, []);
     hljs.addPlugin(new LineFocusPlugin({
