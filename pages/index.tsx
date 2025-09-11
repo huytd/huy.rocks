@@ -16,7 +16,7 @@ const Home: NextPage = () => {
                 <p>{"I write about programming, technology, and things I learn along the way."}</p>
                 
                 <div className="my-8">
-                    <p>{"You can find my thoughts and learnings in my "}<Link href="/everyday"><a className="text-blue-600 hover:text-blue-800 font-bold">everyday blog</a></Link>{"."}</p>
+                    <p>{"You can find my thoughts and learnings in my "}<Link href="/everyday"><a className="font-bold">everyday blog</a></Link>{"."}</p>
                 </div>
 
                 <p>{"In case you're interested, you can reach me "}<b><Link href="mailto:hey@huy.rocks">via email</Link></b> or <b><Link href="https://github.com/huytd">visit my GitHub</Link></b></p>

@@ -52,8 +52,14 @@ export const DataService = {
         // Format the date nicely
         const formattedDate = DataService.formatDate(datePart);
         
-        // Create slug from clean title
-        const slug = cleanTitle.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim();
+        // Create slug from filename (not title) to keep URLs stable when titles change
+        // Use the entire filename without extension, including the date part
+        const slug = fileNameWithoutExt.toLowerCase()
+            .replace(/\./g, '-')       // Convert dots to dashes (for date format)
+            .replace(/[^\w\s-]/g, '')  // Remove special characters except spaces and dashes
+            .replace(/\s+/g, '-')      // Replace spaces with dashes
+            .replace(/-+/g, '-')       // Replace multiple consecutive dashes with single dash
+            .trim();
         
         // Create excerpt from first few lines of content (skip the header line)
         const contentLines = content.split('\n').slice(1).filter(line => line.trim() !== '');
