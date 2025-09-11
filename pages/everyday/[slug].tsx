@@ -87,7 +87,10 @@ const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
 
     marked.use({ renderer: customRenderer });
 
-    let content = marked.parse(post.content);
+    // Remove the first line (header with date/tag) from content
+    const contentLines = post.content.split('\n');
+    const contentWithoutHeader = contentLines.slice(1).join('\n');
+    let content = marked.parse(contentWithoutHeader);
 
     const loadScript = `
     window.MathJax = {
@@ -114,6 +117,21 @@ const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
                         <a className="text-blue-600 hover:text-blue-800 font-mono text-sm">← Back to everyday</a>
                     </Link>
                 </div>
+                
+                {/* Post Header */}
+                <header className="mb-8 pb-6 border-b border-stone-200">
+                    <div className="mb-3">
+                        <span className="inline-block px-3 py-1 text-sm font-medium text-stone-600 bg-stone-100 rounded-full font-mono">
+                            {post.category}
+                        </span>
+                    </div>
+                    <h1 className="font-title text-4xl text-stone-700 mb-3 leading-tight">
+                        {post.title}
+                    </h1>
+                    <time className="text-stone-500 text-lg font-mono" dateTime={post.date}>
+                        {post.formattedDate}
+                    </time>
+                </header>
                 
                 <article className="github-theme post-content">
                     <div dangerouslySetInnerHTML={{ __html: content }}></div>

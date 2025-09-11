@@ -61,11 +61,19 @@ const CategoryPage: NextPage<CategoryPageProps> = ({ category, posts }) => {
 
                 <div className="space-y-6">
                     {posts.map((post) => (
-                        <article key={post.slug}>
+                        <article key={post.slug} className="border-b border-stone-200 pb-4">
                             <Link href={`/everyday/${post.slug}`}>
                                 <a className="font-bold text-xl hover:text-blue-600">{post.title}</a>
                             </Link>
                             <div className="text-gray-600 mt-2">{post.excerpt}</div>
+                            <div className="mt-2 flex items-center gap-3">
+                                <span className="inline-block px-3 py-1 text-sm font-medium text-stone-600 bg-stone-100 rounded-full font-mono">
+                                    {post.category}
+                                </span>
+                                <time className="text-gray-600 text-sm font-mono" dateTime={post.date}>
+                                    {post.formattedDate}
+                                </time>
+                            </div>
                         </article>
                     ))}
                 </div>

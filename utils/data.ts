@@ -5,6 +5,7 @@ import path from 'path';
 export interface BlogPost {
   title: string;
   date: string;
+  formattedDate: string;
   category: string;
   slug: string;
   content: string;
@@ -19,15 +20,22 @@ export const DataService = {
         return files.filter(file => file.endsWith('.md'));
     },
 
+    formatDate: (dateString: string): string => {
+        // Convert MM.DD.YYYY to a proper date format
+        const [month, day, year] = dateString.split('.');
+        const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+        
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    },
+
     parseBlogPost: (fileName: string): BlogPost => {
         const notesDir = path.join(process.cwd(), 'notes');
         const filePath = path.join(notesDir, fileName);
         const content = fs.readFileSync(filePath, 'utf-8');
-        
-        // Extract title from first line (should be # Title format)
-        const lines = content.split('\n');
-        const titleLine = lines[0];
-        const title = titleLine.replace(/^#\s*/, '');
         
         // Parse date and category from filename: "MM.DD.YYYY - Category Title.md"
         const fileNameWithoutExt = fileName.replace('.md', '');
@@ -37,16 +45,24 @@ export const DataService = {
         // Extract category (first word after the date)
         const category = fullTitle.split(' ')[0] || 'General';
         
-        // Create slug from title
-        const slug = title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim();
+        // Clean up the title by removing the category prefix
+        // The filename format is "Category Title" but we want just "Title"
+        const cleanTitle = fullTitle.replace(/^[^\/\s]+\s+/, '').trim();
         
-        // Create excerpt from first few lines of content
-        const contentLines = lines.slice(1).filter(line => line.trim() !== '');
+        // Format the date nicely
+        const formattedDate = DataService.formatDate(datePart);
+        
+        // Create slug from clean title
+        const slug = cleanTitle.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim();
+        
+        // Create excerpt from first few lines of content (skip the header line)
+        const contentLines = content.split('\n').slice(1).filter(line => line.trim() !== '');
         const excerpt = contentLines.slice(0, 3).join(' ').substring(0, 200) + '...';
         
         return {
-            title,
+            title: cleanTitle,
             date: datePart,
+            formattedDate,
             category,
             slug,
             content,
