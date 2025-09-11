@@ -82,6 +82,14 @@ const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
                 return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text}</a><sup class="arrow link">&urtri;</sup>`;
             }
             return false;
+        },
+        image(href: string, title: string, text: string) {
+            // Transform relative _meta paths to use our API endpoint
+            if (href.startsWith('_meta/')) {
+                const imagePath = href.replace('_meta/', '');
+                return `<img src="/api/meta-image/${imagePath}" alt="${text}" title="${title || ''}" />`;
+            }
+            return false; // Use default rendering for other images
         }
     };
 
@@ -128,7 +136,7 @@ const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
                     <h1 className="font-title text-4xl text-stone-700 mb-3 leading-tight">
                         {post.title}
                     </h1>
-                    <time className="text-stone-500 text-lg font-mono" dateTime={post.date}>
+                    <time className="text-stone-500 text-sm font-mono" dateTime={post.date}>
                         {post.formattedDate}
                     </time>
                 </header>
