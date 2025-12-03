@@ -74,10 +74,50 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@napi-rs/canvas-android-arm64@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.npmjs.org/@napi-rs/canvas-android-arm64/-/canvas-android-arm64-0.1.19.tgz"
+  integrity sha512-HSMvj4FpY/EW1yQ2KcpodCb9NGt8leDZqlFf+ORR+K6e4FQ5N42zbiABkNrzje8qCD37+mCWd2IO9P/onBCYCQ==
+
+"@napi-rs/canvas-darwin-arm64@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.npmjs.org/@napi-rs/canvas-darwin-arm64/-/canvas-darwin-arm64-0.1.19.tgz"
+  integrity sha512-ammO0vS5NFzyFWTdiA0mfKyaTgITinCfGo33m/Xw6vX4FlT3gRhvOQZUIwSr7Uxh39TUr0Jb1DQRpUR3zSXKHA==
+
+"@napi-rs/canvas-darwin-x64@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.npmjs.org/@napi-rs/canvas-darwin-x64/-/canvas-darwin-x64-0.1.19.tgz"
+  integrity sha512-KZt5Ey1ETlMHYwVd2cyv3nP6hOl9ouspcJKsphLyZMZ4bGjTGk2FK85ieUS5uko5KkAI/7T6SnCSXsTzb5YsUw==
+
+"@napi-rs/canvas-linux-arm-gnueabihf@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.npmjs.org/@napi-rs/canvas-linux-arm-gnueabihf/-/canvas-linux-arm-gnueabihf-0.1.19.tgz"
+  integrity sha512-6ksFDGbILCo9i3Oara0035kUjvP+uT1nEwcIGMj6v+LjV6pK8j/imYv+ilKKQc95t2dfqAbh9LLfg/HpJxGaFQ==
+
+"@napi-rs/canvas-linux-arm64-gnu@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.npmjs.org/@napi-rs/canvas-linux-arm64-gnu/-/canvas-linux-arm64-gnu-0.1.19.tgz"
+  integrity sha512-GjIOj1x0IGz8J7Fom2LdZrhKUjbOXrytooi57JPvYFRW0ial9lshW8Adnq78yTH+d7iEapOKUEFAtWWq9r0umw==
+
+"@napi-rs/canvas-linux-arm64-musl@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.npmjs.org/@napi-rs/canvas-linux-arm64-musl/-/canvas-linux-arm64-musl-0.1.19.tgz"
+  integrity sha512-6ikcZzSDr5Uvk3AzF/E3bw+6l2VATb1YWGC9uJmmtuPG/e8rRk3r3fi2tq+EtoUIT508MJHQYWB7A0Q6Ztybxg==
+
 "@napi-rs/canvas-linux-x64-gnu@0.1.19":
   version "0.1.19"
   resolved "https://registry.npmjs.org/@napi-rs/canvas-linux-x64-gnu/-/canvas-linux-x64-gnu-0.1.19.tgz"
   integrity sha512-6uHDsXZGuDpZa53NIbkqYng4Cjz5pqVGgfxLDT6T+Lx7I9JeoJi/vBPyB4BLZjdWtY8YhZFWPQIb9bbA6RLMFg==
+
+"@napi-rs/canvas-linux-x64-musl@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.npmjs.org/@napi-rs/canvas-linux-x64-musl/-/canvas-linux-x64-musl-0.1.19.tgz"
+  integrity sha512-WeOOySiwexF91baetu7R193W9i1hfFMVHF+n6vxhwVxh09ahisL+AKhPNKJlouTizXYTvlinALZOnKmiTf7FHA==
+
+"@napi-rs/canvas-win32-x64-msvc@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.npmjs.org/@napi-rs/canvas-win32-x64-msvc/-/canvas-win32-x64-msvc-0.1.19.tgz"
+  integrity sha512-5RP4n9NsZsYi+Bg08Nd3VULr1+m2EC72OR0D77XqOIh5SXT+Hje+9x3FKgFCDEhaVAVqh5HUzYVD7BJhrXSsMA==
 
 "@napi-rs/canvas@^0.1.19":
   version "0.1.19"
@@ -106,6 +146,36 @@
   dependencies:
     glob "7.1.7"
 
+"@next/swc-android-arm64@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-android-arm64/-/swc-android-arm64-12.1.0.tgz"
+  integrity sha512-/280MLdZe0W03stA69iL+v6I+J1ascrQ6FrXBlXGCsGzrfMaGr7fskMa0T5AhQIVQD4nA/46QQWxG//DYuFBcA==
+
+"@next/swc-darwin-arm64@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-12.1.0.tgz"
+  integrity sha512-R8vcXE2/iONJ1Unf5Ptqjk6LRW3bggH+8drNkkzH4FLEQkHtELhvcmJwkXcuipyQCsIakldAXhRbZmm3YN1vXg==
+
+"@next/swc-darwin-x64@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-darwin-x64/-/swc-darwin-x64-12.1.0.tgz"
+  integrity sha512-ieAz0/J0PhmbZBB8+EA/JGdhRHBogF8BWaeqR7hwveb6SYEIJaDNQy0I+ZN8gF8hLj63bEDxJAs/cEhdnTq+ug==
+
+"@next/swc-linux-arm-gnueabihf@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-linux-arm-gnueabihf/-/swc-linux-arm-gnueabihf-12.1.0.tgz"
+  integrity sha512-njUd9hpl6o6A5d08dC0cKAgXKCzm5fFtgGe6i0eko8IAdtAPbtHxtpre3VeSxdZvuGFh+hb0REySQP9T1ttkog==
+
+"@next/swc-linux-arm64-gnu@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-linux-arm64-gnu/-/swc-linux-arm64-gnu-12.1.0.tgz"
+  integrity sha512-OqangJLkRxVxMhDtcb7Qn1xjzFA3s50EIxY7mljbSCLybU+sByPaWAHY4px97ieOlr2y4S0xdPKkQ3BCAwyo6Q==
+
+"@next/swc-linux-arm64-musl@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-linux-arm64-musl/-/swc-linux-arm64-musl-12.1.0.tgz"
+  integrity sha512-hB8cLSt4GdmOpcwRe2UzI5UWn6HHO/vLkr5OTuNvCJ5xGDwpPXelVkYW/0+C3g5axbDW2Tym4S+MQCkkH9QfWA==
+
 "@next/swc-linux-x64-gnu@12.1.0":
   version "12.1.0"
   resolved "https://registry.npmjs.org/@next/swc-linux-x64-gnu/-/swc-linux-x64-gnu-12.1.0.tgz"
@@ -115,6 +185,21 @@
   version "12.1.0"
   resolved "https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-12.1.0.tgz"
   integrity sha512-JohhgAHZvOD3rQY7tlp7NlmvtvYHBYgY0x5ZCecUT6eCCcl9lv6iV3nfu82ErkxNk1H893fqH0FUpznZ/H3pSw==
+
+"@next/swc-win32-arm64-msvc@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-win32-arm64-msvc/-/swc-win32-arm64-msvc-12.1.0.tgz"
+  integrity sha512-T/3gIE6QEfKIJ4dmJk75v9hhNiYZhQYAoYm4iVo1TgcsuaKLFa+zMPh4056AHiG6n9tn2UQ1CFE8EoybEsqsSw==
+
+"@next/swc-win32-ia32-msvc@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-win32-ia32-msvc/-/swc-win32-ia32-msvc-12.1.0.tgz"
+  integrity sha512-iwnKgHJdqhIW19H9PRPM9j55V6RdcOo6rX+5imx832BCWzkDbyomWnlzBfr6ByUYfhohb8QuH4hSGEikpPqI0Q==
+
+"@next/swc-win32-x64-msvc@12.1.0":
+  version "12.1.0"
+  resolved "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-12.1.0.tgz"
+  integrity sha512-aBvcbMwuanDH4EMrL2TthNJy+4nP59Bimn8egqv6GHMVj0a44cU6Au4PjOhLNqEh9l+IpRGBqMTzec94UdC5xg==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -1019,6 +1104,11 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
+
+fsevents@~2.3.2:
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
 function-bind@^1.1.1:
   version "1.1.1"

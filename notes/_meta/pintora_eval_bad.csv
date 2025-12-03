@@ -1,0 +1,1343 @@
+instruction,input,output
+Change the message from 'health check' to 'writes to log'.,"sequenceDiagram
+  Worker->>API Gateway: health check","sequenceDiagram
+  Worker->>API Gateway: writes to log"
+Add a step where WebApp requests login to Redis.,"sequenceDiagram
+  API Gateway->>WebApp: returns 200 OK","sequenceDiagram
+  API Gateway->>WebApp: returns 200 OK
+  WebApp->>Redis: requests login"
+Add a return response from Database back to API Gateway.,"sequenceDiagram
+  API Gateway->>Database: submits form","sequenceDiagram
+  API Gateway->>Database: submits form
+  Database-->>API Gateway: response"
+Change the message from 'returns 200 OK' to 'generates report'.,"sequenceDiagram
+  API Gateway->>PaymentGateway: returns 200 OK","sequenceDiagram
+  API Gateway->>PaymentGateway: generates report"
+"Create a componentDiagram that shows: NotificationSvc requests login to Inventory, and then NotificationSvc processes payment to Frontend, and then Redis health check to AuthService.",,"componentDiagram
+package ""Services"" {
+    [Notification Service]
+    [Inventory Service]
+    [Frontend Service]
+    [AuthService]
+}
+database ""Storage"" {
+    [Redis]
+}
+[Notification Service] --> [Inventory Service]: requests login
+[Notification Service] --> [Frontend Service]: processes payment
+[Notification Service] --> [AuthService]: performs redis health check
+[AuthService] --> [Redis]: queries health status"
+Create a componentDiagram that shows: Worker submits form to User.,,"componentDiagram
+package ""User"" {
+    [User]
+}
+package ""Worker"" {
+    [Worker]
+}
+[User] --> [Worker] : submits form to"
+"Create a componentDiagram that shows: Server authenticates user to Redis, and then Worker returns 200 OK to Inventory, and then TaskQueue writes to log to Inventory.",,"componentDiagram
+package ""Client"" {
+    [Frontend]
+}
+database ""Storage"" {
+    [Redis]
+    [PostgreSQL]
+}
+package ""Server"" {
+    [Server]
+    [Worker]
+    [TaskQueue]
+    [Log]
+}
+[Frontend] --> [Server]: POST /login
+[Server] --> [Redis]: GET session
+[Redis] --> [Server]: session
+[Server] --> [PostgreSQL]: query
+[Server] <- [PostgreSQL]: user
+[Server] --> [Worker]: process
+[Worker] --> [Inventory]: 200 OK
+[Server] --> [TaskQueue]: write
+[TaskQueue] --> [Log]: log"
+Change the message from 'updates record' to 'returns 404 Not Found'.,"sequenceDiagram
+  API Gateway->>PaymentGateway: updates record","sequenceDiagram
+  API Gateway->>PaymentGateway: returns 404 Not Found"
+Add a step where Backend returns 200 OK to User.,"sequenceDiagram
+  API Gateway->>Backend: sends email","sequenceDiagram
+  API Gateway->>Backend: sends email
+  Backend->>User: returns 200 OK"
+Add a step where Frontend returns 200 OK to API Gateway.,"sequenceDiagram
+  Redis->>Frontend: submits form","sequenceDiagram
+  Redis->>Frontend: submits form
+  Frontend->>API Gateway: returns 200 OK"
+"Create a componentDiagram that shows: Backend returns 404 Not Found to Frontend, and then Frontend ack signal to PaymentGateway, and then OrderSystem queries index to User.",,"componentDiagram
+package ""Frontend"" {
+    [User]
+    [Frontend]
+}
+package ""Backend"" {
+    [Backend]
+    [PaymentGateway]
+}
+package ""Order System"" {
+    [OrderSystem]
+    [User]
+}
+[User] --> [Frontend]
+[Frontend] --> [Backend]
+[Backend] --> [PaymentGateway]
+[Frontend] --> [OrderSystem]
+[OrderSystem] --> [User]"
+Create a activityDiagram that shows: NotificationSvc ack signal to Cache.,,"activityDiagram
+start
+:NotificationSvc;
+if (isExpired?) then (yes)
+    :Cache;
+    end
+else (no)
+    :sendAck();
+endif
+end"
+Add a return response from API Gateway back to Worker.,"sequenceDiagram
+  Worker->>API Gateway: fetches data","sequenceDiagram
+  Worker->>API Gateway: fetches data
+  API Gateway-->>Worker: response"
+"Create a activityDiagram that shows: AuthService renders view to Frontend, and then NotificationSvc processes payment to Frontend.",,"activityDiagram
+start
+:AuthService;
+:Frontend;
+:NotificationSvc;
+AuthService ->> Frontend : Render view
+Frontend ->> NotificationSvc : Process payment
+end"
+Create a componentDiagram that shows: TaskQueue updates record to Logger.,,"componentDiagram
+package ""Database"" {
+    [Record]
+}
+database ""Storage"" {
+    [Database]
+}
+package ""Services"" {
+    [Task Queue]
+    [Logger]
+}
+[Task Queue] --> [Record]
+[Record] --> [Database]
+[Database] --> [Record]
+[Task Queue] --> [Logger]"
+Add a step where API Gateway fetches data to Redis.,"sequenceDiagram
+  TaskQueue->>API Gateway: authenticates user","sequenceDiagram
+  TaskQueue->>API Gateway: authenticates user
+  API Gateway->>Redis: fetches data"
+Add a step where TaskQueue queries for user profile to User.,"sequenceDiagram
+  API Gateway->>TaskQueue: updates record","sequenceDiagram
+  API Gateway->>TaskQueue: updates record
+  TaskQueue->>User: queries for user profile"
+"Create a componentDiagram that shows: Frontend validates token to NotificationSvc, and then OrderSystem enqueues job to TaskQueue, and then MetricsSvc authenticates user to Frontend.",,"componentDiagram
+package ""Frontend"" {
+    [User]
+    [TokenValidator]
+}
+database ""NotificationSvc"" {
+    [NotificationService]
+}
+database ""OrderSystem"" {
+    [OrderService]
+}
+database ""TaskQueue"" {
+    [TaskQueue]
+}
+database ""MetricsSvc"" {
+    [MetricsService]
+}
+
+[User] --> [TokenValidator]: validates token
+[TokenValidator] --> [NotificationService]: validates token
+[NotificationService] --> [OrderService]: enqueues job
+[OrderService] --> [TaskQueue]: enqueues job
+[TaskQueue] --> [MetricsService]: updates metrics"
+Create a activityDiagram that shows: AuthService sends email to OrderSystem.,,"activityDiagram
+start
+:AuthService;
+:OrderSystem;
+AuthService -> OrderSystem: Email
+end"
+"Create a componentDiagram that shows: NotificationSvc returns 404 Not Found to Logger, and then PaymentGateway processes payment to Client, and then TaskQueue queries index to MetricsSvc.",,"componentDiagram
+package ""Notification Service"" {
+    [NotificationSvc]
+}
+package ""Logger Service"" {
+    [Logger]
+}
+package ""Payment Gateway"" {
+    [PaymentGateway]
+}
+package ""Client"" {
+    [Client]
+}
+package ""Task Queue"" {
+    [TaskQueue]
+}
+package ""Metrics Service"" {
+    [MetricsSvc]
+}
+
+[NotificationSvc] --> [Logger]
+[NotificationSvc] --> [PaymentGateway]
+[PaymentGateway] --> [Client]
+[TaskQueue] --> [MetricsSvc]"
+Add a step where API Gateway processes payment to TaskQueue.,"sequenceDiagram
+  NotificationSvc->>API Gateway: health check","sequenceDiagram
+  NotificationSvc->>API Gateway: health check
+  API Gateway->>TaskQueue: processes payment"
+"Create a activityDiagram that shows: OrderSystem fetches data to Backend, and then Client returns 404 Not Found to AuthService.",,"activityDiagram
+start
+:OrderSystem;
+if (Has data?) then (yes)
+    :Backend;
+    if (Data available?) then (yes)
+        :Client;
+        if (Correct data?) then (yes)
+            :AuthService;
+            if (Authorized?) then (yes)
+                :Return success;
+            else (no)
+                :Return 403 Forbidden;
+            endif
+        else (no)
+            :Return 400 Bad Request;
+        endif
+        endif
+    else (no)
+        :Return 404 Not Found;
+    endif
+    endif
+else (no)
+    :Return 400 Bad Request;
+endif
+end"
+Change the message from 'returns 404 Not Found' to 'authenticates user'.,"sequenceDiagram
+  Backend->>API Gateway: returns 404 Not Found","sequenceDiagram
+  Backend->>API Gateway: authenticates user"
+Change the message from 'fetches data' to 'returns 200 OK'.,"sequenceDiagram
+  API Gateway->>Logger: fetches data","sequenceDiagram
+  API Gateway->>Logger: returns 200 OK"
+Add a step where Client fetches data to TaskQueue.,"sequenceDiagram
+  API Gateway->>Client: authenticates user","sequenceDiagram
+  API Gateway->>Client: authenticates user
+  Client->>TaskQueue: fetches data"
+"Create a componentDiagram that shows: Database ack signal to Inventory, and then User enqueues job to Backend.",,"componentDiagram
+package ""Client"" {
+    [User]
+}
+database ""Data"" {
+    [Database]
+}
+package ""Services"" {
+    [Inventory]
+    [Backend]
+}
+[User] --> [Database]: ack signal
+[Database] --> [Inventory]: update
+[Inventory] --> [Backend]: enqueue job"
+Add a step where Client writes to log to API Gateway.,"sequenceDiagram
+  Logger->>Client: updates record","sequenceDiagram
+  Logger->>Client: updates record
+  Client->>API Gateway: writes to log"
+Add a return response from API Gateway back to MetricsSvc.,"sequenceDiagram
+  MetricsSvc->>API Gateway: sends email","sequenceDiagram
+  MetricsSvc->>API Gateway: sends email
+  API Gateway-->>MetricsSvc: response"
+"Create a componentDiagram that shows: API Gateway submits form to Redis, and then Backend queries for user profile to Logger.",,"componentDiagram
+package ""Frontend"" {
+    [API Gateway]
+}
+database ""Backend"" {
+    [Redis]
+    [User Profiles]
+}
+database ""Logging"" {
+    [Logger]
+}
+[API Gateway] --> [Redis]
+[API Gateway] --> [Backend]: submit form
+[Backend] --> [User Profiles]: query profile
+[Backend] --> [Logger]: log event"
+"Create a componentDiagram that shows: Inventory updates record to PaymentGateway, and then WebApp submits form to API Gateway.",,"componentDiagram
+package ""Web App"" {
+    [Web App]
+}
+database ""Inventory"" {
+    [Inventory]
+}
+database ""Payment Gateway"" {
+    [Payment Gateway]
+}
+database ""API Gateway"" {
+    [API Gateway]
+}
+[Web App] --> [API Gateway]
+[API Gateway] --> [Inventory]
+[API Gateway] --> [Payment Gateway]"
+Change the message from 'returns 200 OK' to 'authenticates user'.,"sequenceDiagram
+  API Gateway->>WebApp: returns 200 OK","sequenceDiagram
+  API Gateway->>WebApp: authenticates user"
+"Create a componentDiagram that shows: TaskQueue processes payment to Frontend, and then Inventory dequeues job to TaskQueue, and then TaskQueue sends email to Inventory.",,"componentDiagram
+package ""Frontend"" {
+    [Payment Gateway]
+}
+package ""Task Queue"" {
+    [TaskQueue]
+}
+package ""Inventory"" {
+    [Inventory Service]
+    [Email Service]
+}
+
+[Payment Gateway] --> [TaskQueue]: process payment
+[TaskQueue] --> [Inventory Service]: dequeue job
+[Inventory Service] --> [Email Service]: send email
+[Email Service] --> [Inventory Service]: complete job"
+Change the message from 'returns 404 Not Found' to 'generates report'.,"sequenceDiagram
+  API Gateway->>TaskQueue: returns 404 Not Found","sequenceDiagram
+  API Gateway->>TaskQueue: generates report"
+"Create a componentDiagram that shows: Database ack signal to Logger, and then WebApp queries index to Frontend.",,"componentDiagram
+package ""WebApp"" {
+    [Frontend]
+}
+database ""Database"" {
+    [Database]
+    [Logger]
+}
+[Frontend] --> [Database]: queries index
+[Database] --> [Logger]: ack signal"
+Change the message from 'validates token' to 'renders view'.,"sequenceDiagram
+  API Gateway->>Redis: validates token","sequenceDiagram
+  API Gateway->>Redis: renders view"
+"Create a componentDiagram that shows: Cache queries for user profile to NotificationSvc, and then OrderSystem sends email to NotificationSvc.",,"componentDiagram
+package ""Cache"" {
+    [Cache]
+}
+package ""Application"" {
+    [UserService]
+    [OrderService]
+}
+package ""Notification"" {
+    [EmailService]
+    [NotificationSvc]
+}
+[Cache] --> [UserService]
+[Cache] --> [OrderService]
+[UserService] --> [NotificationSvc]
+[OrderService] --> [NotificationSvc]
+[NotificationSvc] --> [EmailService]"
+Change the message from 'queries index' to 'sends email'.,"sequenceDiagram
+  Cache->>API Gateway: queries index","sequenceDiagram
+  Cache->>API Gateway: sends email"
+"Create a componentDiagram that shows: Backend returns 200 OK to TaskQueue, and then Redis generates report to WebApp.",,"componentDiagram
+package ""Backend"" {
+    [Backend]
+}
+database ""TaskQueue"" {
+    [TaskQueue]
+}
+database ""Redis"" {
+    [Redis]
+}
+package ""WebApp"" {
+    [WebApp]
+}
+[Backend] --> [TaskQueue]
+[TaskQueue] --> [Redis]
+[Redis] --> [WebApp]"
+Add a return response from API Gateway back to NotificationSvc.,"sequenceDiagram
+  NotificationSvc->>API Gateway: updates record","sequenceDiagram
+  NotificationSvc->>API Gateway: updates record
+  API Gateway-->>NotificationSvc: response"
+Create a componentDiagram that shows: Frontend validates token to MetricsSvc.,,"componentDiagram
+package ""Frontend"" {
+    [Request]
+}
+database ""Storage"" {
+    [Database]
+}
+[Frontend] --> [Request]
+[Request] --> [Frontend]
+[Frontend] --> [Database]"
+Create a componentDiagram that shows: Cache returns 404 Not Found to AuthService.,,"componentDiagram
+package ""Frontend"" {
+    [User]
+    [Frontend Server]
+}
+database ""Cache"" {
+    [Redis]
+}
+package ""Auth Service"" {
+    [AuthService]
+}
+[User] --> [Frontend Server]
+[Frontend Server] --> [Redis]: Check cache
+[Redis] --> [Frontend Server]: 404 Not Found
+[Frontend Server] --> [AuthService]: Authenticate
+[AuthService] --> [Frontend Server]: 404 Not Found
+[Frontend Server] --> [User]: 404 Not Found"
+"Create a activityDiagram that shows: API Gateway writes to log to MetricsSvc, and then Frontend returns 200 OK to Inventory, and then Redis requests login to MetricsSvc.",,"activityDiagram
+start
+:API Gateway;
+writeToLog -> MetricsSvc;
+:Frontend;
+return200 -> Inventory;
+:Redis;
+requestLogin -> MetricsSvc;
+end"
+"Create a activityDiagram that shows: NotificationSvc submits form to User, and then Frontend requests login to Logger.",,"activityDiagram
+start
+:NotificationSvc;
+:User;
+:Frontend;
+:Logger;
+NotificationSvc->>User: Submit form
+User-->>Frontend: Login request
+Frontend->>Logger: Log
+end"
+"Create a componentDiagram that shows: User ack signal to OrderSystem, and then Client writes to log to User.",,"componentDiagram
+package ""Client"" {
+    [User]
+    [Client]
+}
+database ""Storage"" {
+    [Log]
+}
+[User] --> [Client]
+[Client] --> [Log]
+[Log] --> [Client]"
+Add a step where API Gateway renders view to Frontend.,"sequenceDiagram
+  NotificationSvc->>API Gateway: updates record","sequenceDiagram
+  NotificationSvc->>API Gateway: updates record
+  API Gateway->>Frontend: renders view"
+Create a componentDiagram that shows: AuthService queries for user profile to Logger.,,"componentDiagram
+package ""Client"" {
+    [Frontend]
+    [Mobile App]
+}
+database ""Auth Service"" {
+    [AuthService]
+}
+database ""User Data"" {
+    [UserProfile]
+}
+database ""Logging"" {
+    [Logger]
+}
+[Frontend] --> [AuthService]: request
+[Mobile App] --> [AuthService]: request
+[AuthService] --> [UserProfile]: validate
+[AuthService] --> [Logger]: log"
+Add a return response from Client back to API Gateway.,"sequenceDiagram
+  API Gateway->>Client: dequeues job","sequenceDiagram
+  API Gateway->>Client: dequeues job
+  Client-->>API Gateway: response"
+Add a step where OrderSystem renders view to API Gateway.,"sequenceDiagram
+  Server->>OrderSystem: processes payment","sequenceDiagram
+  Server->>OrderSystem: processes payment
+  OrderSystem->>API Gateway: renders view"
+"Create a componentDiagram that shows: Worker health check to PaymentGateway, and then PaymentGateway dequeues job to Backend.",,"componentDiagram
+package ""Worker"" {
+    [Worker]
+}
+package ""Payment Gateway"" {
+    [PaymentGateway]
+}
+package ""Backend"" {
+    [Backend]
+}
+[Worker] --> [PaymentGateway]
+[PaymentGateway] --> [Backend]"
+Change the message from 'submits form' to 'authenticates user'.,"sequenceDiagram
+  API Gateway->>Cache: submits form","sequenceDiagram
+  API Gateway->>Cache: authenticates user"
+Add a step where API Gateway writes to log to Inventory.,"sequenceDiagram
+  Cache->>API Gateway: returns 200 OK","sequenceDiagram
+  Cache->>API Gateway: returns 200 OK
+  API Gateway->>Inventory: writes to log"
+"Create a componentDiagram that shows: User queries for user profile to Redis, and then WebApp queries index to MetricsSvc, and then Redis renders view to TaskQueue.",,"componentDiagram
+package ""Client"" {
+    [User]
+}
+database ""Cache"" {
+    [Redis]
+}
+package ""Service"" {
+    [WebApp]
+}
+database ""Data"" {
+    [MetricsSvc]
+}
+package ""Queue"" {
+    [TaskQueue]
+}
+[User] --> [Redis]: queries
+[Redis] --> [WebApp]: renders
+[WebApp] --> [MetricsSvc]: queries
+[MetricsSvc] --> [Redis]: queries
+[Redis] --> [TaskQueue]: renders"
+"Create a componentDiagram that shows: Redis writes to log to WebApp, and then TaskQueue queries index to NotificationSvc, and then Frontend returns 404 Not Found to Inventory.",,"componentDiagram
+package ""WebApp"" {
+    [Frontend]
+    [TaskQueue]
+}
+database ""Log"" {
+    [Redis]
+}
+service ""Services"" {
+    [Index]
+    [NotificationSvc]
+}
+[Frontend] --> [Redis]
+[Redis] --> [WebApp]
+[WebApp] --> [TaskQueue]
+[TaskQueue] --> [Index]
+[Frontend] --> [NotificationSvc]
+[Frontend] --> [Inventory]"
+Change the message from 'generates report' to 'dequeues job'.,"sequenceDiagram
+  API Gateway->>Frontend: generates report","sequenceDiagram
+  API Gateway->>Frontend: dequeues job"
+Create a componentDiagram that shows: Inventory generates report to WebApp.,,"componentDiagram
+package ""Inventory"" {
+    [Database]
+}
+package ""WebApp"" {
+    [Report]
+}
+[Database] --> [Report]
+[Report] --> [WebApp]"
+"Create a componentDiagram that shows: PaymentGateway queries index to Backend, and then Server sends email to API Gateway.",,"componentDiagram
+package ""Frontend"" {
+    [Payment Gateway]
+}
+database ""Backend"" {
+    [Index]
+    [Backend Service]
+}
+package ""Email Service"" {
+    [Server]
+}
+package ""API Gateway"" {
+    [API Gateway]
+}
+[Payment Gateway] --> [Index]
+[Payment Gateway] --> [Backend Service]
+[Backend Service] --> [API Gateway]
+[API Gateway] --> [Server]
+[Server] --> [API Gateway]"
+"Create a activityDiagram that shows: WebApp returns 200 OK to Redis, and then Client validates token to Redis, and then Backend returns 200 OK to Server.",,"activityDiagram
+start
+:WebApp;
+:Redis;
+:Client;
+:Backend;
+:Server;
+WebApp ->> Redis : request
+Redis -->> WebApp : 200 OK
+WebApp ->> Client : token
+Client ->> Redis : validate
+Redis -->> Client : valid
+Client ->> Backend : request
+Backend -->> Client : 200 OK
+Client ->> Server : response
+end"
+Add a step where API Gateway renders view to WebApp.,"sequenceDiagram
+  Cache->>API Gateway: queries for user profile","sequenceDiagram
+  Cache->>API Gateway: queries for user profile
+  API Gateway->>WebApp: renders view"
+Add a return response from API Gateway back to NotificationSvc.,"sequenceDiagram
+  NotificationSvc->>API Gateway: renders view","sequenceDiagram
+  NotificationSvc->>API Gateway: renders view
+  API Gateway-->>NotificationSvc: response"
+"Create a componentDiagram that shows: Frontend queries for user profile to TaskQueue, and then Worker returns 404 Not Found to Redis.",,"componentDiagram
+package ""Frontend"" {
+    [User]
+    [API Gateway]
+}
+database ""Storage"" {
+    [Redis]
+    [TaskQueue]
+}
+package ""Worker"" {
+    [Worker]
+}
+[User] --> [API Gateway]
+[API Gateway] --> [Redis]: get profile
+[API Gateway] --> [TaskQueue]: enqueue task
+[Worker] --> [TaskQueue]: dequeue task
+[Worker] --> [Redis]: check profile
+[Worker] --> [API Gateway]: 404 Not Found"
+"Create a componentDiagram that shows: API Gateway returns 200 OK to PaymentGateway, and then NotificationSvc queries for user profile to Backend, and then OrderSystem ack signal to User.",,"componentDiagram
+package ""API Gateway"" {
+    [Gateway]
+}
+package ""Payment Gateway"" {
+    [PaymentGateway]
+}
+package ""Notification Service"" {
+    [NotificationSvc]
+}
+package ""Backend"" {
+    [Backend]
+}
+package ""Order System"" {
+    [OrderSystem]
+}
+package ""User"" {
+    [User]
+}
+
+[Gateway] --> [PaymentGateway]
+[PaymentGateway] --> [NotificationSvc]
+[NotificationSvc] --> [Backend]
+[OrderSystem] --> [Backend]
+[NotificationSvc] --> [User]
+[Gateway] --> [PaymentGateway]
+[PaymentGateway] --> [NotificationSvc]
+[NotificationSvc] --> [Backend]
+[OrderSystem] --> [Backend]
+[NotificationSvc] --> [User]"
+Add a step where Server enqueues job to TaskQueue.,"sequenceDiagram
+  API Gateway->>Server: writes to log","sequenceDiagram
+  API Gateway->>Server: writes to log
+  Server->>TaskQueue: enqueues job"
+Change the message from 'authenticates user' to 'validates token'.,"sequenceDiagram
+  Client->>API Gateway: authenticates user","sequenceDiagram
+  Client->>API Gateway: validates token"
+"Create a componentDiagram that shows: Server requests login to Backend, and then User dequeues job to PaymentGateway.",,"componentDiagram
+package ""Frontend"" {
+    [Server]
+    [Client]
+}
+package ""Backend"" {
+    [Backend]
+    [Database]
+}
+package ""Payment Gateway"" {
+    [Payment Gateway]
+}
+[Server] --> [Backend]: requests login
+[Backend] --> [Database]: validate credentials
+[Backend] --> [Client]: issue token
+[Client] --> [Backend]: request job
+[Backend] --> [Payment Gateway]: submit payment
+[Payment Gateway] --> [Backend]: payment status
+[Backend] --> [Client]: job details"
+"Create a componentDiagram that shows: Cache queries index to Inventory, and then TaskQueue renders view to API Gateway.",,"componentDiagram
+package ""Cache"" {
+    [Query]
+    [Index]
+}
+database ""Inventory"" {
+    [Product]
+    [Category]
+}
+queue ""TaskQueue"" {
+    [Worker]
+}
+package ""API Gateway"" {
+    [Frontend]
+    [Backend]
+}
+[Query] --> [Index]
+[Index] --> [Product]
+[Product] --> [Category]
+[Frontend] --> [Backend]
+[Backend] --> [Inventory]
+[Backend] --> [TaskQueue]
+[TaskQueue] --> [Worker]"
+"Create a componentDiagram that shows: Worker dequeues job to WebApp, and then WebApp returns 200 OK to TaskQueue, and then Server dequeues job to Database.",,"componentDiagram
+package ""Worker"" {
+    [Worker]
+}
+package ""WebApp"" {
+    [WebApp]
+}
+package ""TaskQueue"" {
+    [TaskQueue]
+}
+package ""Server"" {
+    [Server]
+}
+package ""Database"" {
+    [Database]
+}
+[Worker] --> [TaskQueue]: dequeues job
+[TaskQueue] --> [WebApp]: returns 200 OK
+[WebApp] --> [Server]: sends request
+[Server] --> [Database]: processes"
+Add a return response from MetricsSvc back to API Gateway.,"sequenceDiagram
+  API Gateway->>MetricsSvc: updates record","sequenceDiagram
+  API Gateway->>MetricsSvc: updates record
+  MetricsSvc-->>API Gateway: response"
+Add a return response from Client back to API Gateway.,"sequenceDiagram
+  API Gateway->>Client: updates record","sequenceDiagram
+  API Gateway->>Client: updates record
+  Client-->>API Gateway: response"
+Add a step where Redis ack signal to AuthService.,"sequenceDiagram
+  API Gateway->>Redis: dequeues job","sequenceDiagram
+  API Gateway->>Redis: dequeues job
+  Redis->>AuthService: ack signal"
+Add a step where Server processes payment to API Gateway.,"sequenceDiagram
+  Database->>Server: ack signal","sequenceDiagram
+  Database->>Server: ack signal
+  Server->>API Gateway: processes payment"
+"Create a activityDiagram that shows: Client dequeues job to Worker, and then TaskQueue returns 200 OK to Client, and then TaskQueue writes to log to Frontend.",,"activityDiagram
+start
+:Client;
+:Worker;
+:TaskQueue;
+:Log;
+:Frontend;
+Client ->> TaskQueue: Dequeue job
+TaskQueue -->> Client: 200 OK
+Client ->> TaskQueue: Write to log
+TaskQueue ->> Log: Log entry
+Log ->> Frontend: Update UI
+end"
+Change the message from 'submits form' to 'writes to log'.,"sequenceDiagram
+  AuthService->>API Gateway: submits form","sequenceDiagram
+  AuthService->>API Gateway: writes to log"
+"Create a activityDiagram that shows: PaymentGateway requests login to Logger, and then Inventory fetches data to Redis.",,"activityDiagram
+start
+:PaymentGateway;
+:Logger;
+:Inventory;
+:Redis;
+PaymentGateway -> Logger : login
+Logger --> PaymentGateway : authenticated
+PaymentGateway -> Inventory : fetch
+Inventory --> PaymentGateway : data
+PaymentGateway -> Redis : cache
+Redis <-- PaymentGateway : cached
+end"
+"Create a componentDiagram that shows: Redis ack signal to API Gateway, and then OrderSystem generates report to TaskQueue.",,"componentDiagram
+package ""API Gateway"" {
+    [API Gateway]
+}
+package ""Order System"" {
+    [Order System]
+}
+package ""Task Queue"" {
+    [Task Queue]
+}
+[API Gateway] --> [Order System]: ack signal
+[Order System] --> [Task Queue]: generate report"
+Add a return response from API Gateway back to Logger.,"sequenceDiagram
+  Logger->>API Gateway: updates record","sequenceDiagram
+  Logger->>API Gateway: updates record
+  API Gateway-->>Logger: response"
+Add a return response from Cache back to API Gateway.,"sequenceDiagram
+  API Gateway->>Cache: returns 200 OK","sequenceDiagram
+  API Gateway->>Cache: returns 200 OK
+  Cache-->>API Gateway: response"
+Add a step where Redis returns 200 OK to API Gateway.,"sequenceDiagram
+  Cache->>Redis: authenticates user","sequenceDiagram
+  Cache->>Redis: authenticates user
+  Redis->>API Gateway: returns 200 OK"
+"Create a componentDiagram that shows: Client fetches data to WebApp, and then PaymentGateway requests login to Logger.",,"componentDiagram
+package ""Client"" {
+    [Browser]
+}
+database ""Web App"" {
+    [Database]
+}
+package ""Payment Gateway"" {
+    [Payment Gateway]
+}
+package ""Logger"" {
+    [Logger]
+}
+[Browser] --> [Database]: fetch data
+[Payment Gateway] --> [Logger]: request login"
+Add a step where Backend requests login to API Gateway.,"sequenceDiagram
+  Database->>Backend: processes payment","sequenceDiagram
+  Database->>Backend: processes payment
+  Backend->>API Gateway: requests login"
+Add a return response from Redis back to API Gateway.,"sequenceDiagram
+  API Gateway->>Redis: submits form","sequenceDiagram
+  API Gateway->>Redis: submits form
+  Redis-->>API Gateway: response"
+"Create a componentDiagram that shows: Database processes payment to API Gateway, and then PaymentGateway ack signal to MetricsSvc.",,"componentDiagram
+package ""Database"" {
+    [Database]
+}
+package ""API Gateway"" {
+    [API Gateway]
+}
+package ""Payment Gateway"" {
+    [Payment Gateway]
+}
+package ""Metrics Service"" {
+    [Metrics Svc]
+}
+[Database] --> [API Gateway]
+[API Gateway] --> [Payment Gateway]
+[Payment Gateway] --> [Metrics Svc]"
+"Create a componentDiagram that shows: Server writes to log to Inventory, and then API Gateway returns 404 Not Found to NotificationSvc, and then Frontend returns 404 Not Found to AuthService.",,"componentDiagram
+package ""Server"" {
+    [Server]
+}
+database ""Inventory"" {
+    [Inventory]
+}
+package ""API Gateway"" {
+    [API Gateway]
+}
+package ""Notification Service"" {
+    [NotificationSvc]
+}
+package ""Frontend"" {
+    [Frontend]
+}
+package ""Auth Service"" {
+    [AuthService]
+}
+[Server] --> [Inventory]
+[Server] --> [API Gateway]
+[API Gateway] --> [NotificationSvc]
+[Frontend] --> [API Gateway]
+[API Gateway] --> [Frontend]
+[API Gateway] --> [AuthService]"
+"Create a componentDiagram that shows: Backend renders view to Cache, and then API Gateway returns 404 Not Found to MetricsSvc, and then Client submits form to User.",,"componentDiagram
+package ""Backend"" {
+    [Backend]
+}
+database ""Cache"" {
+    [Cache]
+}
+package ""API Gateway"" {
+    [API Gateway]
+}
+package ""Metrics Service"" {
+    [MetricsSvc]
+}
+database ""Database"" {
+    [Database]
+}
+package ""Frontend"" {
+    [Client]
+}
+[Backend] --> [Cache]
+[API Gateway] --> [MetricsSvc]
+[Client] --> [API Gateway]
+[API Gateway] --> [Database]"
+"Create a componentDiagram that shows: Database fetches data to Client, and then Backend writes to log to Cache, and then Server health check to Worker.",,"componentDiagram
+package ""Backend"" {
+    [Backend]
+    [Cache]
+    [Log]
+}
+database ""Database"" {
+    [Database]
+}
+[Client] --> [Database]
+[Database] --> [Client]
+[Backend] --> [Log]
+[Backend] --> [Cache]
+[Backend] --> [Database]
+package ""Server"" {
+    [Server]
+    [Worker]
+}
+[Server] --> [Worker]"
+Add a step where Inventory returns 200 OK to WebApp.,"sequenceDiagram
+  API Gateway->>Inventory: returns 200 OK","sequenceDiagram
+  API Gateway->>Inventory: returns 200 OK
+  Inventory->>WebApp: returns 200 OK"
+Create a componentDiagram that shows: PaymentGateway queries for user profile to Inventory.,,"componentDiagram
+package ""Payment Gateway"" {
+    [Payment Gateway]
+}
+package ""Database"" {
+    [Database]
+}
+[Payment Gateway] --> [Database]"
+Add a step where NotificationSvc sends email to API Gateway.,"sequenceDiagram
+  Worker->>NotificationSvc: renders view","sequenceDiagram
+  Worker->>NotificationSvc: renders view
+  NotificationSvc->>API Gateway: sends email"
+"Create a componentDiagram that shows: PaymentGateway renders view to MetricsSvc, and then Client renders view to TaskQueue, and then WebApp health check to Inventory.",,"componentDiagram
+package ""Client"" {
+    [MetricsSvc]
+}
+package ""WebApp"" {
+    [Client]
+    [TaskQueue]
+}
+package ""Gateway"" {
+    [PaymentGateway]
+    [Inventory]
+}
+[Client] --> [MetricsSvc]
+[Client] --> [TaskQueue]
+[Client] --> [PaymentGateway]
+[Client] --> [WebApp]"
+"Create a componentDiagram that shows: User dequeues job to Frontend, and then PaymentGateway fetches data to Redis.",,"componentDiagram
+package ""Frontend"" {
+    [User]
+    [Frontend Service]
+}
+database ""Payment Gateway"" {
+    [Payment Gateway]
+    [Database]
+}
+database ""Cache"" {
+    [Redis]
+}
+[User] --> [Frontend Service]
+[Frontend Service] --> [Payment Gateway]
+[Payment Gateway] --> [Database]
+[Payment Gateway] --> [Redis]"
+Add a return response from API Gateway back to Cache.,"sequenceDiagram
+  Cache->>API Gateway: fetches data","sequenceDiagram
+  Cache->>API Gateway: fetches data
+  API Gateway-->>Cache: response"
+Add a step where MetricsSvc queries index to Redis.,"sequenceDiagram
+  API Gateway->>MetricsSvc: enqueues job","sequenceDiagram
+  API Gateway->>MetricsSvc: enqueues job
+  MetricsSvc->>Redis: queries index"
+Add a return response from PaymentGateway back to API Gateway.,"sequenceDiagram
+  API Gateway->>PaymentGateway: requests login","sequenceDiagram
+  API Gateway->>PaymentGateway: requests login
+  PaymentGateway-->>API Gateway: response"
+Create a componentDiagram that shows: OrderSystem health check to PaymentGateway.,,"componentDiagram
+package ""Order System"" {
+    [Order Service]
+    [Health Check]
+}
+database ""Payment Gateway"" {
+    [Payment Gateway]
+}
+[Health Check] --> [Order Service]
+[Order Service] --> [Payment Gateway]"
+Add a step where Logger sends email to Database.,"sequenceDiagram
+  API Gateway->>Logger: authenticates user","sequenceDiagram
+  API Gateway->>Logger: authenticates user
+  Logger->>Database: sends email"
+Add a step where Server renders view to API Gateway.,"sequenceDiagram
+  PaymentGateway->>Server: queries for user profile","sequenceDiagram
+  PaymentGateway->>Server: queries for user profile
+  Server->>API Gateway: renders view"
+"Create a componentDiagram that shows: Backend health check to OrderSystem, and then TaskQueue validates token to AuthService, and then PaymentGateway validates token to Frontend.",,"componentDiagram
+package ""Backend"" {
+    [OrderSystem]
+    [TaskQueue]
+}
+package ""AuthService"" {
+    [AuthService]
+}
+package ""Frontend"" {
+    [Frontend]
+}
+package ""PaymentGateway"" {
+    [PaymentGateway]
+}
+[OrderSystem] --> [TaskQueue]
+[TaskQueue] --> [AuthService]
+[Frontend] --> [AuthService]
+[TaskQueue] --> [PaymentGateway]"
+Add a return response from API Gateway back to Inventory.,"sequenceDiagram
+  Inventory->>API Gateway: returns 200 OK","sequenceDiagram
+  Inventory->>API Gateway: returns 200 OK
+  API Gateway-->>Inventory: response"
+Add a step where TaskQueue fetches data to API Gateway.,"sequenceDiagram
+  Backend->>TaskQueue: sends email","sequenceDiagram
+  Backend->>TaskQueue: sends email
+  TaskQueue->>API Gateway: fetches data"
+"Create a componentDiagram that shows: PaymentGateway ack signal to WebApp, and then Backend returns 200 OK to MetricsSvc, and then NotificationSvc fetches data to WebApp.",,"componentDiagram
+package ""WebApp"" {
+    [Frontend]
+    [Backend]
+}
+package ""PaymentGateway"" {
+    [PaymentProcessor]
+    [WebhookReceiver]
+}
+package ""MetricsSvc"" {
+    [MetricsCollector]
+}
+package ""NotificationSvc"" {
+    [NotificationFetcher]
+}
+[Frontend] --> [PaymentProcessor]: requests payment
+[PaymentProcessor] --> [WebhookReceiver]: sends ack signal
+[WebhookReceiver] --> [Backend]: processes payment
+[Backend] --> [MetricsCollector]: reports metrics
+[MetricsCollector] --> [Backend]: collects metrics
+[Backend] --> [NotificationFetcher]: fetches notifications
+[NotificationFetcher] --> [Frontend]: delivers notifications"
+"Create a activityDiagram that shows: Cache health check to TaskQueue, and then Client generates report to Inventory.",,"activityDiagram
+start
+:Cache health check;
+if (Cache available?) then (yes)
+    :Get data from cache;
+else (no)
+    :Get data from TaskQueue;
+    if (Processing complete?) then (yes)
+        :Process data;
+        :Store result in cache;
+    else (no)
+        :Wait for processing;
+        goto end;
+    endif
+endif
+end"
+Add a step where TaskQueue health check to Cache.,"sequenceDiagram
+  API Gateway->>TaskQueue: health check","sequenceDiagram
+  API Gateway->>TaskQueue: health check
+  TaskQueue->>Cache: health check"
+Change the message from 'returns 200 OK' to 'health check'.,"sequenceDiagram
+  API Gateway->>Frontend: returns 200 OK","sequenceDiagram
+  API Gateway->>Frontend: health check"
+Add a return response from API Gateway back to User.,"sequenceDiagram
+  User->>API Gateway: queries index","sequenceDiagram
+  User->>API Gateway: queries index
+  API Gateway-->>User: response"
+Add a return response from API Gateway back to Inventory.,"sequenceDiagram
+  Inventory->>API Gateway: generates report","sequenceDiagram
+  Inventory->>API Gateway: generates report
+  API Gateway-->>Inventory: response"
+"Create a componentDiagram that shows: Server generates report to AuthService, and then TaskQueue updates record to Database, and then Redis enqueues job to Database.",,"componentDiagram
+package ""Server"" {
+    [Server]
+}
+package ""AuthService"" {
+    [AuthService]
+}
+package ""TaskQueue"" {
+    [TaskQueue]
+}
+package ""Database"" {
+    [Database]
+}
+package ""Redis"" {
+    [Redis]
+}
+[Server] --> [AuthService]
+[TaskQueue] --> [Database]
+[Redis] --> [Database]"
+"Create a activityDiagram that shows: Frontend authenticates user to API Gateway, and then AuthService submits form to TaskQueue, and then OrderSystem processes payment to AuthService.",,"activityDiagram
+start
+:Frontend authenticates user to API Gateway;
+API Gateway -> AuthService: Request
+AuthService -> TaskQueue: Submit form
+TaskQueue -> OrderSystem: Process payment
+OrderSystem -> AuthService: Payment processed
+end"
+Change the message from 'submits form' to 'returns 404 Not Found'.,"sequenceDiagram
+  NotificationSvc->>API Gateway: submits form","sequenceDiagram
+  NotificationSvc->>API Gateway: returns 404 Not Found"
+Add a step where API Gateway writes to log to WebApp.,"sequenceDiagram
+  AuthService->>API Gateway: authenticates user","sequenceDiagram
+  AuthService->>API Gateway: authenticates user
+  API Gateway->>WebApp: writes to log"
+"Create a componentDiagram that shows: Worker authenticates user to Backend, and then Frontend updates record to Redis, and then NotificationSvc validates token to AuthService.",,"componentDiagram
+package ""Backend"" {
+    [AuthService]
+    [Redis]
+    [Worker]
+    [NotificationSvc]
+}
+package ""Frontend"" {
+    [WebApp]
+}
+[WebApp] --> [AuthService]: authenticate
+[WebApp] --> [Redis]: update record
+[Worker] --> [AuthService]: validate token
+[NotificationSvc] --> [AuthService]: validate token"
+Add a step where Redis authenticates user to WebApp.,"sequenceDiagram
+  API Gateway->>Redis: dequeues job","sequenceDiagram
+  API Gateway->>Redis: dequeues job
+  Redis->>WebApp: authenticates user"
+"Create a componentDiagram that shows: TaskQueue queries index to Database, and then Database fetches data to OrderSystem, and then Logger fetches data to User.",,"componentDiagram
+package ""User"" {
+    [User]
+}
+database ""Database"" {
+    [Database]
+}
+package ""Order System"" {
+    [OrderSystem]
+}
+package ""Task Queue"" {
+    [TaskQueue]
+}
+package ""Logger"" {
+    [Logger]
+}
+[User] --> [TaskQueue]
+[TaskQueue] --> [Database]
+[Database] --> [OrderSystem]
+[OrderSystem] --> [Logger]"
+Add a step where NotificationSvc authenticates user to Server.,"sequenceDiagram
+  API Gateway->>NotificationSvc: fetches data","sequenceDiagram
+  API Gateway->>NotificationSvc: fetches data
+  NotificationSvc->>Server: authenticates user"
+Create a componentDiagram that shows: PaymentGateway returns 200 OK to API Gateway.,,"componentDiagram
+package ""API Gateway"" {
+    [API Gateway]
+}
+database ""Payment Gateway"" {
+    [Payment Gateway]
+}
+[API Gateway] --> [Payment Gateway]
+[Payment Gateway] --> [API Gateway] : 200 OK"
+Add a step where Redis queries index to Backend.,"sequenceDiagram
+  API Gateway->>Redis: sends email","sequenceDiagram
+  API Gateway->>Redis: sends email
+  Redis->>Backend: queries index"
+Add a step where AuthService requests login to Inventory.,"sequenceDiagram
+  API Gateway->>AuthService: returns 200 OK","sequenceDiagram
+  API Gateway->>AuthService: returns 200 OK
+  AuthService->>Inventory: requests login"
+Change the message from 'processes payment' to 'returns 200 OK'.,"sequenceDiagram
+  API Gateway->>Inventory: processes payment","sequenceDiagram
+  API Gateway->>Inventory: returns 200 OK"
+Change the message from 'updates record' to 'queries for user profile'.,"sequenceDiagram
+  Logger->>API Gateway: updates record","sequenceDiagram
+  Logger->>API Gateway: queries for user profile"
+Create a componentDiagram that shows: Client ack signal to User.,,"componentDiagram
+package ""Client"" {
+    [Client]
+}
+package ""User"" {
+    [User]
+}
+[Client] --> [User] : ack signal"
+Add a step where Redis updates record to API Gateway.,"sequenceDiagram
+  Backend->>Redis: renders view","sequenceDiagram
+  Backend->>Redis: renders view
+  Redis->>API Gateway: updates record"
+"Create a componentDiagram that shows: Redis sends email to TaskQueue, and then PaymentGateway returns 404 Not Found to WebApp, and then Worker returns 404 Not Found to Redis.",,"componentDiagram
+package ""WebApp"" {
+    [User]
+    [WebApp]
+}
+package ""Worker"" {
+    [Worker]
+}
+package ""Database"" {
+    [Database]
+}
+package ""Email"" {
+    [Email]
+    [Redis]
+}
+package ""TaskQueue"" {
+    [TaskQueue]
+}
+package ""Payment"" {
+    [PaymentGateway]
+    [PaymentProcessor]
+}
+[User] --> [WebApp]
+[WebApp] --> [Database]
+[WebApp] --> [PaymentGateway]
+[PaymentGateway] --> [PaymentProcessor]
+[PaymentProcessor] --> [Database]
+[WebApp] --> [Redis]
+[Redis] --> [TaskQueue]
+[TaskQueue] --> [Worker]
+[Worker] --> [Database]"
+Add a return response from API Gateway back to Frontend.,"sequenceDiagram
+  Frontend->>API Gateway: returns 404 Not Found","sequenceDiagram
+  Frontend->>API Gateway: returns 404 Not Found
+  API Gateway-->>Frontend: response"
+"Create a componentDiagram that shows: Client processes payment to Server, and then PaymentGateway queries for user profile to AuthService.",,"componentDiagram
+package ""Client"" {
+    [Client]
+}
+package ""Server"" {
+    [Server]
+    [PaymentGateway]
+    [AuthService]
+}
+[Client] --> [Server]
+[Server] --> [PaymentGateway]
+[Server] --> [AuthService]"
+"Create a componentDiagram that shows: Redis submits form to NotificationSvc, and then TaskQueue submits form to AuthService, and then TaskQueue writes to log to Client.",,"componentDiagram
+package ""Client"" {
+    [NotificationSvc]
+    [TaskQueue]
+    [AuthService]
+}
+database ""Log"" {
+    [Log]
+}
+[NotificationSvc] --> [TaskQueue]
+[TaskQueue] --> [AuthService]
+[TaskQueue] --> [Log]"
+"Create a componentDiagram that shows: Inventory updates record to WebApp, and then Database updates record to PaymentGateway, and then Cache writes to log to MetricsSvc.",,"componentDiagram
+package ""WebApp"" {
+    [Frontend]
+}
+package ""Database"" {
+    [Database]
+}
+package ""Payment Gateway"" {
+    [Gateway]
+}
+package ""Cache"" {
+    [Cache]
+}
+package ""Metrics Service"" {
+    [Metrics]
+}
+[Frontend] --> [Database]
+[Database] --> [Gateway]
+[Gateway] --> [Cache]
+[Cache] --> [Metrics]"
+Add a step where PaymentGateway renders view to Logger.,"sequenceDiagram
+  API Gateway->>PaymentGateway: processes payment","sequenceDiagram
+  API Gateway->>PaymentGateway: processes payment
+  PaymentGateway->>Logger: renders view"
+"Create a componentDiagram that shows: WebApp updates record to User, and then TaskQueue dequeues job to Cache.",,"componentDiagram
+package ""WebApp"" {
+    [User]
+    [Record]
+}
+package ""TaskQueue"" {
+    [Job]
+}
+package ""Cache"" {
+    [Content]
+}
+[WebApp] --> [User]
+[WebApp] --> [Record]: updates
+[WebApp] --> [Job]: creates
+[TaskQueue] --> [Job]
+[TaskQueue] --> [Content]: updates"
+Add a return response from OrderSystem back to API Gateway.,"sequenceDiagram
+  API Gateway->>OrderSystem: writes to log","sequenceDiagram
+  API Gateway->>OrderSystem: writes to log
+  OrderSystem-->>API Gateway: response"
+"Create a componentDiagram that shows: Inventory returns 200 OK to NotificationSvc, and then WebApp authenticates user to API Gateway, and then Backend queries index to Frontend.",,"componentDiagram
+package ""WebApp"" {
+    [Frontend]
+    [Backend]
+    [Database]
+}
+package ""NotificationSvc"" {
+    [NotificationSvc]
+}
+package ""API Gateway"" {
+    [API Gateway]
+}
+[Frontend] --> [API Gateway]
+[API Gateway] --> [Backend]
+[Backend] --> [Database]
+[NotificationSvc] --> [Backend]
+[Frontend] --> [NotificationSvc] : 200 OK
+[WebApp] --> [API Gateway]
+[API Gateway] --> [Backend]
+[Backend] --> [Database]"
+Add a step where Worker validates token to API Gateway.,"sequenceDiagram
+  Logger->>Worker: queries index","sequenceDiagram
+  Logger->>Worker: queries index
+  Worker->>API Gateway: validates token"
+"Create a componentDiagram that shows: MetricsSvc processes payment to WebApp, and then User submits form to TaskQueue, and then MetricsSvc queries index to User.",,"componentDiagram
+package ""Frontend"" {
+    [WebApp]
+}
+package ""Backend"" {
+    [MetricsSvc]
+    [TaskQueue]
+    [User]
+}
+[WebApp] --> [MetricsSvc]: processes payment
+[User] --> [TaskQueue]: submits form
+[MetricsSvc] --> [User]: queries index"
+"Create a componentDiagram that shows: AuthService validates token to User, and then Frontend updates record to User.",,"componentDiagram
+package ""Frontend"" {
+    [React]
+}
+package ""AuthService"" {
+    [Token]
+    [User]
+}
+[React] --> [Token]: validates
+[Token] --> [User]: validates
+[React] --> [User]: updates"
+Add a return response from Server back to API Gateway.,"sequenceDiagram
+  API Gateway->>Server: requests login","sequenceDiagram
+  API Gateway->>Server: requests login
+  Server-->>API Gateway: response"
+"Create a componentDiagram that shows: API Gateway health check to AuthService, and then OrderSystem fetches data to NotificationSvc.",,"componentDiagram
+package ""API Gateway"" {
+    [API Gateway]
+}
+package ""AuthService"" {
+    [AuthService]
+}
+package ""Order System"" {
+    [Order System]
+}
+package ""Notification Service"" {
+    [Notification Service]
+}
+[API Gateway] --> [AuthService]
+[Order System] --> [Notification Service]"
+"Create a componentDiagram that shows: Server dequeues job to Backend, and then Inventory submits form to TaskQueue.",,"componentDiagram
+package ""Frontend"" {
+    [Server]
+}
+package ""Backend"" {
+    [Database]
+    [Backend]
+}
+package ""Workflow"" {
+    [Inventory]
+    [TaskQueue]
+}
+[Server] --> [Backend]
+[Backend] --> [Database]
+[Server] --> [Inventory]
+[Server] --> [TaskQueue]"
+Add a step where Logger enqueues job to API Gateway.,"sequenceDiagram
+  TaskQueue->>Logger: authenticates user","sequenceDiagram
+  TaskQueue->>Logger: authenticates user
+  Logger->>API Gateway: enqueues job"
+Add a return response from API Gateway back to OrderSystem.,"sequenceDiagram
+  OrderSystem->>API Gateway: returns 404 Not Found","sequenceDiagram
+  OrderSystem->>API Gateway: returns 404 Not Found
+  API Gateway-->>OrderSystem: response"
+Change the message from 'enqueues job' to 'updates record'.,"sequenceDiagram
+  Client->>API Gateway: enqueues job","sequenceDiagram
+  Client->>API Gateway: updates record"
+"Create a componentDiagram that shows: MetricsSvc processes payment to Cache, and then Client ack signal to Cache.",,"componentDiagram
+package ""Client"" {
+    [Client]
+}
+package ""Cache"" {
+    [Cache]
+}
+package ""Metrics Service"" {
+    [MetricsSvc]
+}
+[Client] --> [Cache]
+[MetricsSvc] --> [Cache]
+[Client] --> [MetricsSvc] : ack"
+"Create a componentDiagram that shows: Server returns 200 OK to Cache, and then Inventory renders view to Server, and then NotificationSvc dequeues job to AuthService.",,"componentDiagram
+package ""Server"" {
+    [Server]
+}
+database ""Cache"" {
+    [Cache]
+}
+package ""Inventory"" {
+    [Inventory]
+}
+database ""NotificationSvc"" {
+    [NotificationSvc]
+}
+package ""AuthService"" {
+    [AuthService]
+}
+[Server] --> [Cache]
+[Inventory] --> [Server]
+[NotificationSvc] --> [AuthService]"
