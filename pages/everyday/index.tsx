@@ -2,6 +2,7 @@ import type { NextPage, GetStaticProps } from 'next'
 import Head from "next/head";
 import Link from 'next/link'
 import { DataService, BlogPost } from '../../utils/data'
+import { categorySlug } from '../../utils/category';
 
 interface EverydayProps {
   posts: BlogPost[];
@@ -51,7 +52,7 @@ const Everyday: NextPage<EverydayProps> = ({ posts, categories }) => {
                     <h2>Categories</h2>
                     <div className="flex flex-wrap gap-2 mt-4">
                         {categories.map((category) => (
-                            <Link key={category} href={`/category/${category.toLowerCase()}`}>
+                            <Link key={category} href={`/category/${categorySlug(category)}`}>
                                 <a className="text-blue-600 hover:text-blue-800 font-mono text-sm">
                                     {category}
                                 </a>

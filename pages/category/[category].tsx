@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage 
 import Link from 'next/link';
 import { DataService, BlogPost } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';
+import { categorySlug } from '../../utils/category';
 
 interface CategoryPageProps {
   category: string;
@@ -11,7 +12,7 @@ interface CategoryPageProps {
 export const getStaticPaths: GetStaticPaths = async () => {
     const categories = DataService.getCategories();
     const paths = categories.map((category) => ({
-        params: { category: category.toLowerCase() }
+        params: { category: categorySlug(category) }
     }));
 
     return {
@@ -32,7 +33,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     return {
         props: { 
-            category: category.charAt(0).toUpperCase() + category.slice(1),
+            category: posts[0].category,
             posts 
         },
         revalidate: 3600 // Revalidate every hour

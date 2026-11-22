@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { SITE_URL } from "../utils/consts";
 import { DataService } from "../utils/data";
+import { categorySlug } from '../utils/category';
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     if (res) {
@@ -21,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
         // Add category pages
         const categories = DataService.getCategories();
         for (let category of categories) {
-            sitemap.push(`${SITE_URL}/category/${category.toLowerCase()}`);
+            sitemap.push(`${SITE_URL}/category/${categorySlug(category)}`);
         }
 
         res.setHeader('Content-type', 'text/plain');

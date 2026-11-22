@@ -6,6 +6,7 @@ import { CommonSEO } from '../../components/SEO';
 import { base64_encode } from '../../utils/base64';
 import { useEffect } from 'react';
 import { renderMarkdown } from '../../utils/markdown';
+import { categorySlug } from '../../utils/category';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const posts = DataService.getAllPosts();
@@ -90,7 +91,7 @@ const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
                         <Link href="/everyday">
                             <a className="text-blue-600 hover:text-blue-800 font-mono text-sm">← All posts</a>
                         </Link>
-                        <Link href={`/category/${post.category.toLowerCase()}`}>
+                        <Link href={`/category/${categorySlug(post.category)}`}>
                             <a className="text-blue-600 hover:text-blue-800 font-mono text-sm">More in {post.category} →</a>
                         </Link>
                     </div>

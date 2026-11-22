@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { markdownToExcerpt } from './markdown';
+import { categorySlug, splitCategoryAndTitle } from './category';
 
 export interface BlogPost {
   title: string;
@@ -41,13 +42,9 @@ export const DataService = {
         const fileNameWithoutExt = fileName.replace('.md', '');
         const [datePart, ...titleParts] = fileNameWithoutExt.split(' - ');
         const fullTitle = titleParts.join(' - ');
-        
-        // Extract category (first word after the date)
-        const category = fullTitle.split(' ')[0] || 'General';
-        
-        // Clean up the title by removing the category prefix
-        // The filename format is "Category Title" but we want just "Title"
-        const cleanTitle = fullTitle.replace(/^[^\/\s]+\s+/, '').trim();
+
+        // Split "Category Title" into the category and the actual title
+        const { category, title: cleanTitle } = splitCategoryAndTitle(fullTitle);
         
         // Format the date nicely
         const formattedDate = DataService.formatDate(datePart);
@@ -78,13 +75,32 @@ export const DataService = {
 
     getAllPosts: (): BlogPost[] => {
         const files = DataService.getAllMarkdownFiles();
-        return files.map(file => DataService.parseBlogPost(file))
-            .sort((a, b) => {
-                // Sort by date (newest first)
-                const dateA = new Date(a.date.replace(/\./g, '/'));
-                const dateB = new Date(b.date.replace(/\./g, '/'));
-                return dateB.getTime() - dateA.getTime();
-            });
+        const posts = files.map(file => DataService.parseBlogPost(file));
+
+        // Categories that differ only in case ("Typescript" vs "TypeScript")
+        // are the same category: use its most common spelling everywhere.
+        const spellings = new Map<string, Map<string, number>>();
+        for (const post of posts) {
+            const slug = categorySlug(post.category);
+            const counts = spellings.get(slug) ?? new Map<string, number>();
+            counts.set(post.category, (counts.get(post.category) ?? 0) + 1);
+            spellings.set(slug, counts);
+        }
+        const canonical = new Map<string, string>();
+        spellings.forEach((counts, slug) => {
+            const [name] = Array.from(counts.entries()).sort((a, b) => b[1] - a[1])[0];
+            canonical.set(slug, name);
+        });
+        for (const post of posts) {
+            post.category = canonical.get(categorySlug(post.category)) ?? post.category;
+        }
+
+        return posts.sort((a, b) => {
+            // Sort by date (newest first)
+            const dateA = new Date(a.date.replace(/\./g, '/'));
+            const dateB = new Date(b.date.replace(/\./g, '/'));
+            return dateB.getTime() - dateA.getTime();
+        });
     },
 
     getPostBySlug: (slug: string): BlogPost | null => {
@@ -92,9 +108,11 @@ export const DataService = {
         return posts.find(post => post.slug === slug) || null;
     },
 
+    // `category` is the category's URL slug (see categorySlug)
     getPostsByCategory: (category: string): BlogPost[] => {
+        const slug = categorySlug(category);
         const posts = DataService.getAllPosts();
-        return posts.filter(post => post.category.toLowerCase() === category.toLowerCase());
+        return posts.filter(post => categorySlug(post.category) === slug);
     },
 
     getCategories: (): string[] => {
