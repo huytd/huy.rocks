@@ -1067,6 +1067,12 @@ a:target {
         margin-right: 0.25rem;
         font-size: 0.5em;
         vertical-align: 4px;
+
+        svg {
+            // Tailwind's preflight makes SVGs block-level
+            display: inline;
+            vertical-align: baseline;
+        }
     }
 }
 

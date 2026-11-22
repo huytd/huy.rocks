@@ -27,6 +27,13 @@ marked.setOptions({
     }
 });
 
+// Small outlined triangle (◹) after external links. Drawn as SVG because the
+// ◹ character is missing from many fonts and showed up as a "missing glyph" box.
+const EXTERNAL_LINK_ICON =
+    '<svg viewBox="0 0 10 10" width="1em" height="1em" aria-hidden="true">' +
+    '<path d="M1.5 1.5H8.5V8.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>' +
+    '</svg>';
+
 const customRenderer = {
     heading: function (
         text: string,
@@ -41,7 +48,7 @@ const customRenderer = {
     },
     link(href: string, title: string, text: string) {
         if (href.startsWith("http") && href.indexOf(SITE_URL) === -1) {
-            return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text}</a><sup class="arrow link">&urtri;</sup>`;
+            return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text}</a><sup class="arrow link">${EXTERNAL_LINK_ICON}</sup>`;
         }
         return false;
     },
