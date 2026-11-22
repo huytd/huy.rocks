@@ -1,68 +1,11 @@
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
-import { marked } from 'marked';
-import hljs from 'highlight.js';
-import hljsZig from '../../utils/zig';
-import { LineFocusPlugin } from 'highlightjs-focus';
 import 'highlight.js/styles/base16/equilibrium-light.css';
 import Link from 'next/link';
 import { DataService, BlogPost } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';
 import { base64_encode } from '../../utils/base64';
 import { useEffect } from 'react';
-import { SITE_URL } from '../../utils/consts';
-import { mathExtension } from '../../utils/markdownMath';
-
-hljs.registerLanguage("zig", hljsZig);
-
-// Configure highlight.js and marked once at module load; doing it inside the
-// component re-registered plugins/renderers on every render.
-hljs.addPlugin(new LineFocusPlugin({
-    unfocusedStyle: {
-        opacity: "0.35",
-        filter: "grayscale(1)"
-    }
-}));
-
-marked.setOptions({
-    gfm: true,
-    breaks: true,
-    smartypants: true,
-    highlight: function (code, lang) {
-        const language = lang || 'plaintext';
-        return hljs.highlight(code, { language }).value;
-    }
-});
-
-const customRenderer = {
-    heading: function (
-        text: string,
-        level: 1 | 2 | 3 | 4 | 5 | 6,
-    ) {
-        var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-        return '<h' + level + '><a class="font-bold" name="' +
-            escapedText +
-            '" href="#' +
-            escapedText +
-            '">' + text + '</a></h' + level + '>';
-    },
-    link(href: string, title: string, text: string) {
-        if (href.startsWith("http") && href.indexOf(SITE_URL) === -1) {
-            return `<a class="external-link" href='${href}' target="_blank" rel="noopener">${text}</a><sup class="arrow link">&urtri;</sup>`;
-        }
-        return false;
-    },
-    image(href: string, title: string, text: string) {
-        // Transform relative _meta paths to use our API endpoint
-        if (href.startsWith('_meta/')) {
-            const imagePath = href.replace('_meta/', '');
-            return `<img src="/api/meta-image/${imagePath}" alt="${text}" title="${title || ''}" />`;
-        }
-        return false; // Use default rendering for other images
-    }
-};
-
-marked.use({ renderer: customRenderer });
-marked.use(mathExtension);
+import { renderMarkdown } from '../../utils/markdown';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const posts = DataService.getAllPosts();
@@ -107,7 +50,7 @@ const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
     // Remove the first line (header with date/tag) from content
     const contentLines = post.content.split('\n');
     const contentWithoutHeader = contentLines.slice(1).join('\n');
-    let content = marked.parse(contentWithoutHeader);
+    const content = renderMarkdown(contentWithoutHeader);
 
     const pageTitle = post.title;
     const description = post.excerpt;

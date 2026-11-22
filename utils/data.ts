@@ -1,6 +1,6 @@
-import { marked } from 'marked';
 import fs from 'fs';
 import path from 'path';
+import { markdownToExcerpt } from './markdown';
 
 export interface BlogPost {
   title: string;
@@ -61,9 +61,8 @@ export const DataService = {
             .replace(/-+/g, '-')       // Replace multiple consecutive dashes with single dash
             .trim();
         
-        // Create excerpt from first few lines of content (skip the header line)
-        const contentLines = content.split('\n').slice(1).filter(line => line.trim() !== '');
-        const excerpt = contentLines.slice(0, 3).join(' ').substring(0, 200) + '...';
+        // Plain-text excerpt of the post body (skip the header line)
+        const excerpt = markdownToExcerpt(content.split('\n').slice(1).join('\n'));
         
         return {
             title: cleanTitle,
