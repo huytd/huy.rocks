@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { DataService, BlogPost } from '../../utils/data';
 import { CommonSEO } from '../../components/SEO';
 import { base64_encode } from '../../utils/base64';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { renderMarkdown } from '../../utils/markdown';
 import { categorySlug } from '../../utils/category';
+import { typesetMath } from '../../utils/mathjax';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const posts = DataService.getAllPosts();
@@ -37,15 +38,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
+    const contentRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
-        // Typeset math after mount and whenever we navigate to another post
-        // client-side. On a full page load MathJax typesets on its own once
-        // the script finishes loading, so it may not be available yet here.
-        const mathJax = window.MathJax;
-        if (mathJax?.typesetPromise) {
-            mathJax.typesetClear?.();
-            mathJax.typesetPromise();
-        }
+        // Typeset the math in the post body after client-side navigation.
+        // On a full page load MathJax's own startup pass handles it.
+        if (contentRef.current) typesetMath(contentRef.current);
     }, [post.slug]);
 
     // Remove the first line (header with date/tag) from content
@@ -83,7 +81,7 @@ const BlogPost: NextPage<{ post: BlogPost }> = ({ post }) => {
                 </header>
                 
                 <article className="github-theme post-content">
-                    <div dangerouslySetInnerHTML={{ __html: content }}></div>
+                    <div ref={contentRef} dangerouslySetInnerHTML={{ __html: content }}></div>
                 </article>
 
                 <div className="mt-12 pt-8 border-t">

@@ -1,8 +1,13 @@
 declare global {
   interface Window {
     MathJax?: {
-      typesetPromise?: () => Promise<void>;
-      typesetClear?: () => void;
+      version?: string;
+      startup?: {
+        promise: Promise<void>;
+        typeset?: boolean;
+      };
+      typesetPromise?: (elements?: HTMLElement[]) => Promise<void>;
+      typesetClear?: (elements?: HTMLElement[]) => void;
       tex?: {
         inlineMath?: string[][];
         displayMath?: string[][];
